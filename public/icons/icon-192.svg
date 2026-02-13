@@ -1,0 +1,19 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" rx="32" fill="#0a0a0a"/>
+  <rect x="16" y="16" width="160" height="160" rx="24" fill="url(#gradient)"/>
+  
+  <!-- Modern Athletic "A" Symbol -->
+  <path d="M96 40L136 152H116L108 128H84L76 152H56L96 40Z" fill="white"/>
+  <path d="M89.6 108H102.4L96 88L89.6 108Z" fill="#dc2626"/>
+  
+  <!-- Performance chevron -->
+  <path d="M144 64L160 80L144 96L136 88L144 80L136 72L144 64Z" fill="#dc2626" opacity="0.8"/>
+  <path d="M32 96L48 112L32 128L24 120L32 112L24 104L32 96Z" fill="#dc2626" opacity="0.6"/>
+  
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+  </defs>
+</svg>

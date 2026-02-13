@@ -64,17 +64,17 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: 'Marcin Nowak',
-    role: 'Running Coach',
-    avatar: '/avatars/marcin.jpg',
-    content: 'Managing 20+ athletes became effortless. The communication tools are game-changing.',
+    name: 'Marcus Johnson',
+    role: 'Football Coach',
+    avatar: '/avatars/marcus.jpg',
+    content: 'Managing my entire team became effortless. The communication tools are game-changing.',
     rating: 5,
   },
   {
-    name: 'Ola Wiśniewska',
-    role: 'HYROX Athlete',
-    avatar: '/avatars/ola.jpg',
-    content: 'Finally, a platform that understands endurance sports beyond just running.',
+    name: 'Katarzyna Nowak',
+    role: 'CrossFit Athlete',
+    avatar: '/avatars/kat.jpg',
+    content: 'Finally, a platform that truly understands every sport and every athlete\'s needs.',
     rating: 5,
   },
 ];
@@ -139,11 +139,11 @@ export default function LandingPage() {
                 Elevate Your
                 <br />
                 <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-                  Endurance
+                  Performance
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                The premium digital platform for endurance sports. 
+                The premium digital platform for every sport and every athlete. 
                 Advanced coaching tools, social features, and AI insights 
                 designed for serious athletes and coaches.
               </p>
@@ -205,7 +205,7 @@ export default function LandingPage() {
               Everything You Need
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Professional-grade tools for planning, tracking, analyzing, and optimizing your endurance training.
+              Professional-grade tools for planning, tracking, analyzing, and optimizing your athletic performance.
             </p>
           </motion.div>
 
@@ -333,7 +333,7 @@ export default function LandingPage() {
           <div className="flex items-center justify-between">
             <Logo size="sm" />
             <p className="text-sm text-muted-foreground">
-              © 2024 ATHLO. Crafted with ❤️ in Poland.
+              © 2025 ATHLO. Crafted with ❤️ in Poland.
             </p>
           </div>
         </div>

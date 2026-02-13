@@ -1,0 +1,21 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="86" fill="#0a0a0a"/>
+  <rect x="42" y="42" width="428" height="428" rx="64" fill="url(#gradient)"/>
+  
+  <!-- Modern Athletic "A" Symbol -->
+  <path d="M256 107L363 406H310L289 342H223L202 406H149L256 107Z" fill="white"/>
+  <path d="M239.2 288H272.8L256 235L239.2 288Z" fill="#dc2626"/>
+  
+  <!-- Performance chevrons -->
+  <path d="M384 171L427 214L384 257L363 236L384 214L363 192L384 171Z" fill="#dc2626" opacity="0.8"/>
+  <path d="M85 257L128 300L85 343L64 322L85 300L64 278L85 257Z" fill="#dc2626" opacity="0.6"/>
+  <path d="M406 128L442 164L406 200L389 183L406 164L389 145L406 128Z" fill="#dc2626" opacity="0.4"/>
+  <path d="M106 312L142 348L106 384L89 367L106 348L89 329L106 312Z" fill="#dc2626" opacity="0.3"/>
+  
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+  </defs>
+</svg>

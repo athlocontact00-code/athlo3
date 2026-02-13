@@ -209,6 +209,15 @@
   }
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
 /* Utility classes for ATHLO */
 .athlo-glow {
   animation: pulse-glow 2s ease-in-out infinite;
@@ -216,4 +225,14 @@
 
 .athlo-gradient {
   background: linear-gradient(135deg, oklch(0.57 0.22 25) 0%, oklch(0.45 0.18 25) 100%);
+}
+
+.shimmer {
+  background: linear-gradient(90deg, 
+    hsl(var(--muted)) 25%, 
+    hsl(var(--muted) / 0.8) 50%, 
+    hsl(var(--muted)) 75%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
 }

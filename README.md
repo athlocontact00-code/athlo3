@@ -1,6 +1,6 @@
 # ATHLO 🇵🇱
 
-> Premium digital platform for endurance sports with coaching, social, and AI layers
+> Universal sports platform with coaching, social, and AI layers for every sport and every athlete
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -10,12 +10,12 @@
 
 ## ✨ Features
 
-ATHLO is a comprehensive platform designed for serious endurance athletes and coaches, featuring:
+ATHLO is a comprehensive platform designed for serious athletes and coaches across every sport, featuring:
 
 ### 🎯 **Smart Training Management**
 - **Workout Planning**: TrainingPeaks-level precision with AI-powered recommendations
 - **Execution Tracking**: Real-time workout completion with compliance analysis
-- **Template Library**: Extensive workout templates for all endurance sports
+- **Template Library**: Extensive workout templates for every sport
 
 ### ❤️ **Daily Readiness Monitoring**
 - **HRV Tracking**: Heart Rate Variability analysis for recovery insights
@@ -264,7 +264,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Polish engineering excellence 🇵🇱
 - Open source community
-- Endurance sports athletes worldwide
+- Athletes worldwide across every sport
 - Coach feedback and insights
 
 ## 📞 Support
@@ -278,4 +278,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built with ❤️ in Poland for athletes worldwide**
 
-*ATHLO - Elevate Your Endurance*
+*ATHLO - Elevate Your Performance*
