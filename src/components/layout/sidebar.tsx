@@ -13,6 +13,7 @@ import {
   TrendingUp, 
   MessageCircle, 
   Bot, 
+  CreditCard,
   Settings,
   LogOut,
   User
@@ -71,6 +72,12 @@ const navigationItems: NavigationItem[] = [
     href: '/dashboard/ai-coach',
     icon: Bot,
     description: 'AI-powered coaching',
+  },
+  {
+    label: 'Billing',
+    href: '/dashboard/billing',
+    icon: CreditCard,
+    description: 'Plans and billing',
   },
 ];
 
