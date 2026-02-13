@@ -17,7 +17,19 @@ import {
   MessageCircle,
   Play,
   Shield,
-  Zap
+  Zap,
+  Dumbbell,
+  Timer,
+  Trophy,
+  Mountain,
+  Waves,
+  Bike,
+  Footprints,
+  Users2,
+  Sword,
+  CircleDot,
+  Flame,
+  Activity
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -26,33 +38,48 @@ const features = [
   {
     icon: Target,
     title: 'Smart Planning',
-    description: 'AI-powered workout planning with TrainingPeaks-level precision',
+    description: 'AI-powered training plans tailored to every sport and every athlete',
   },
   {
     icon: Heart,
     title: 'Daily Check-ins',
-    description: 'Track readiness with HRV, sleep, stress, and recovery metrics',
+    description: 'Universal readiness tracking with HRV, sleep, stress, and recovery metrics',
   },
   {
     icon: Calendar,
-    title: 'Central Calendar',
-    description: 'Unified view of workouts, events, and training phases',
+    title: 'Unified Calendar',
+    description: 'One calendar for all sports: training, competitions, events, and recovery',
   },
   {
     icon: TrendingUp,
     title: 'Progress Analytics',
-    description: 'CTL/ATL/TSB analysis with explainable insights',
+    description: 'Sport-agnostic performance insights with explainable AI analysis',
   },
   {
     icon: MessageCircle,
     title: 'Team Communication',
-    description: 'Contextual messaging linked to workouts and training data',
+    description: 'Connect athletes and coaches across all disciplines with context',
   },
   {
     icon: Brain,
     title: 'AI Coach',
-    description: 'Personalized recommendations and intelligent Q&A support',
+    description: 'Personalized guidance for every sport, from running to martial arts',
   },
+];
+
+const sports = [
+  { icon: Footprints, name: 'Running' },
+  { icon: Bike, name: 'Cycling' },
+  { icon: Waves, name: 'Swimming' },
+  { icon: Dumbbell, name: 'CrossFit' },
+  { icon: Users2, name: 'Football' },
+  { icon: Trophy, name: 'Basketball' },
+  { icon: Sword, name: 'MMA' },
+  { icon: Mountain, name: 'Climbing' },
+  { icon: CircleDot, name: 'Tennis' },
+  { icon: Timer, name: 'HYROX' },
+  { icon: Flame, name: 'Yoga' },
+  { icon: Activity, name: 'Triathlon' },
 ];
 
 const testimonials = [
@@ -60,21 +87,42 @@ const testimonials = [
     name: 'Anna Kowalski',
     role: 'Triathlete',
     avatar: '/avatars/anna.jpg',
-    content: 'ATHLO transformed my training. The AI insights helped me PR by 8 minutes.',
+    content: 'ATHLO transformed my training across all three disciplines. The unified approach helped me PR by 8 minutes.',
     rating: 5,
   },
   {
     name: 'Marcus Johnson',
     role: 'Football Coach',
     avatar: '/avatars/marcus.jpg',
-    content: 'Managing my entire team became effortless. The communication tools are game-changing.',
+    content: 'Managing team training sessions, individual players, and match preparation in one platform is revolutionary.',
     rating: 5,
   },
   {
     name: 'Katarzyna Nowak',
     role: 'CrossFit Athlete',
     avatar: '/avatars/kat.jpg',
-    content: 'Finally, a platform that truly understands every sport and every athlete\'s needs.',
+    content: 'From weightlifting to cardio, ATHLO understands every movement and helps me optimize everything.',
+    rating: 5,
+  },
+  {
+    name: 'Diego Martinez',
+    role: 'MMA Fighter',
+    avatar: '/avatars/diego.jpg',
+    content: 'Training striking, grappling, and conditioning - ATHLO handles the complexity so I can focus on fighting.',
+    rating: 5,
+  },
+  {
+    name: 'Sarah Chen',
+    role: 'Yoga Instructor',
+    avatar: '/avatars/sarah.jpg',
+    content: 'Even for mind-body practices, ATHLO provides insights that help me and my students grow.',
+    rating: 5,
+  },
+  {
+    name: 'Coach Thompson',
+    role: 'Basketball Coach',
+    avatar: '/avatars/thompson.jpg',
+    content: 'Team management, player development, and game analysis - everything I need in one premium platform.',
     rating: 5,
   },
 ];
@@ -133,19 +181,19 @@ export default function LandingPage() {
               className="mb-8"
             >
               <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
-                🇵🇱 Premium Polish Engineering
+                🇵🇱 Built in Poland with Pride
               </Badge>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
-                Elevate Your
+                Your Sport.
                 <br />
                 <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-                  Performance
+                  Your Platform.
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                The premium digital platform for every sport and every athlete. 
-                Advanced coaching tools, social features, and AI insights 
-                designed for serious athletes and coaches.
+                The universal premium platform for every sport and every athlete. 
+                Advanced coaching tools, team communication, and AI insights 
+                designed for serious athletes and coaches across all disciplines.
               </p>
             </motion.div>
 
@@ -175,24 +223,68 @@ export default function LandingPage() {
               className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto"
             >
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary">10k+</div>
-                <div className="text-sm text-muted-foreground">Athletes</div>
+                <div className="text-2xl font-bold text-primary">15k+</div>
+                <div className="text-sm text-muted-foreground">Active Athletes</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary">500+</div>
-                <div className="text-sm text-muted-foreground">Coaches</div>
+                <div className="text-2xl font-bold text-primary">1.2k+</div>
+                <div className="text-sm text-muted-foreground">Professional Coaches</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary">1M+</div>
-                <div className="text-sm text-muted-foreground">Workouts Logged</div>
+                <div className="text-2xl font-bold text-primary">2.5M+</div>
+                <div className="text-sm text-muted-foreground">Workouts Tracked</div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
+      {/* Sports Showcase */}
+      <section className="py-16 bg-muted/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              Built for Every Sport
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Whether you're a weekend warrior or professional athlete, ATHLO adapts to your discipline
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6"
+          >
+            {sports.map((sport, index) => {
+              const Icon = sport.icon;
+              return (
+                <motion.div
+                  key={sport.name}
+                  variants={fadeInUp}
+                  className="flex flex-col items-center p-4 rounded-xl hover:bg-card/50 transition-colors group"
+                >
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
+                    <Icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <span className="text-sm font-medium text-foreground">{sport.name}</span>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
       {/* Features Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -205,7 +297,7 @@ export default function LandingPage() {
               Everything You Need
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Professional-grade tools for planning, tracking, analyzing, and optimizing your athletic performance.
+              Professional-grade tools that work across all sports, disciplines, and training methodologies.
             </p>
           </motion.div>
 
@@ -222,7 +314,7 @@ export default function LandingPage() {
                 <motion.div
                   key={feature.title}
                   variants={fadeInUp}
-                  className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-all duration-300 group"
+                  className="bg-card border border-border rounded-xl p-6 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group"
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -243,7 +335,7 @@ export default function LandingPage() {
       </section>
 
       {/* Social Proof Section */}
-      <section className="py-20">
+      <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -256,7 +348,7 @@ export default function LandingPage() {
               Trusted by Athletes Worldwide
             </h2>
             <p className="text-xl text-muted-foreground">
-              Join thousands of athletes and coaches who trust ATHLO
+              From recreational enthusiasts to professional athletes across every sport
             </p>
           </motion.div>
 
@@ -265,13 +357,13 @@ export default function LandingPage() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={testimonial.name}
                 variants={fadeInUp}
-                className="bg-card border border-border rounded-xl p-6"
+                className="bg-card border border-border rounded-xl p-6 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
               >
                 <div className="flex items-center gap-1 mb-4">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
@@ -306,10 +398,10 @@ export default function LandingPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Ready to Transform Your Training?
+              Elevate Every Athlete
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join the premium platform that's helping athletes and coaches achieve their goals with intelligent training insights.
+              Join the universal premium platform that's helping athletes and coaches across all sports achieve their greatest potential.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/register">
@@ -333,7 +425,7 @@ export default function LandingPage() {
           <div className="flex items-center justify-between">
             <Logo size="sm" />
             <p className="text-sm text-muted-foreground">
-              © 2025 ATHLO. Crafted with ❤️ in Poland.
+              © 2025 ATHLO. Built with ❤️ in Poland 🇵🇱
             </p>
           </div>
         </div>

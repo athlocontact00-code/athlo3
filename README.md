@@ -1,281 +1,312 @@
-# ATHLO 🇵🇱
+# ⚡️ ATHLO
 
-> Universal sports platform with coaching, social, and AI layers for every sport and every athlete
+<div align="center">
+  
+  [![ATHLO](https://img.shields.io/badge/ATHLO-Universal%20Sports%20Platform-dc2626?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIGZpbGw9IiNkYzI2MjYiLz4KPHBhdGggZD0iTTggMTBIMTZWMTRIOFYxMFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==)](https://athlo.com)
+  [![Built in Poland](https://img.shields.io/badge/Built%20in-Poland%20🇵🇱-dc2626?style=for-the-badge)](https://github.com/athlo)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+  **Your Sport. Your Platform.**
+  
+  *The universal premium platform for every sport and every athlete*
 
-## ✨ Features
+  [![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+  [![React](https://img.shields.io/badge/React-18-61dafb?style=flat-square&logo=react)](https://reactjs.org/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3-38b2ac?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+  [![Drizzle](https://img.shields.io/badge/Drizzle%20ORM-Latest-c5f74f?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIGZpbGw9IiNjNWY3NGYiLz4KPC9zdmc+)](https://orm.drizzle.team/)
+  [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=flat-square&logo=vercel)](https://vercel.com/)
 
-ATHLO is a comprehensive platform designed for serious athletes and coaches across every sport, featuring:
+</div>
 
-### 🎯 **Smart Training Management**
-- **Workout Planning**: TrainingPeaks-level precision with AI-powered recommendations
-- **Execution Tracking**: Real-time workout completion with compliance analysis
-- **Template Library**: Extensive workout templates for every sport
+---
 
-### ❤️ **Daily Readiness Monitoring**
-- **HRV Tracking**: Heart Rate Variability analysis for recovery insights
-- **Sleep Quality**: Comprehensive sleep tracking and scoring
-- **Stress & Energy**: Daily check-ins with readiness score calculation
-- **Recovery Recommendations**: AI-driven recovery and training adjustments
+## 🌟 Features
 
-### 📅 **Central Training Calendar**
-- **Unified View**: All workouts, events, and training phases in one place
-- **Mobile-First**: Optimized day/week views for mobile training
-- **Desktop Power**: Month view with detailed summaries for coaches
-- **Smart Scheduling**: Conflict detection and automatic adjustments
+ATHLO is designed to be the **WHOOP of sports platforms** - premium, intelligent, and universal. Here's what makes it extraordinary:
 
-### 📊 **Advanced Analytics**
-- **Load Management**: CTL/ATL/TSB analysis with trend visualization
-- **Performance Insights**: Explainable AI cards with actionable recommendations
-- **Progress Tracking**: Long-term performance trends and goal monitoring
-- **Comparative Analysis**: Benchmarking against similar athletes
+### 🧠 **AI-Powered Training**
+- **Smart Planning**: AI-generated workout plans tailored to every sport
+- **Personalized Coach**: Context-aware recommendations and Q&A support
+- **Progress Analytics**: CTL/ATL/TSB analysis with explainable insights
 
-### 💬 **Contextual Communication**
-- **Team Messaging**: Coach-athlete and team communication
-- **Workout Context**: Messages linked to specific workouts and training data
-- **Group Features**: Team management with role-based permissions
-- **Real-time Updates**: Instant notifications for important events
+### 📊 **Universal Tracking**
+- **Daily Check-ins**: HRV, sleep, stress, and recovery metrics
+- **Multi-Sport Support**: From running to MMA, yoga to HYROX
+- **Integration Hub**: Strava, Garmin, Polar, WHOOP, and more
 
-### 🤖 **AI-Powered Coaching**
-- **Personal Assistant**: 24/7 AI coach for training questions
-- **Workout Generation**: Automated workout creation based on goals
-- **Micro-cycle Planning**: Intelligent training periodization
-- **Explainable Insights**: Clear reasoning behind all recommendations
+### 🎯 **Performance Optimization**
+- **Training Zones**: Heart rate zone management and optimization
+- **Goal Setting**: Season planning with target events and races
+- **Load Management**: Prevent overtraining with intelligent monitoring
 
-### 🔗 **Platform Integrations**
-- **Strava**: Automatic activity import and sync
-- **Garmin**: Direct integration with Garmin Connect
-- **Apple Health**: iOS health and fitness data
-- **Google Fit**: Android fitness tracking
-- **Polar, Suunto, Wahoo**: Multi-platform device support
+### 👥 **Team & Communication**
+- **Coach-Athlete Connection**: Seamless communication and program sharing
+- **Team Management**: Handle multiple athletes with ease
+- **Contextual Messaging**: Discussions linked to workouts and data
 
-## 🏗️ Tech Stack
+### 📱 **Premium Experience**
+- **Dark Theme**: Sleek, professional interface with Polish red (#dc2626) accents
+- **Mobile-First**: Progressive Web App with native-like experience
+- **Keyboard Shortcuts**: Power user features with ⌘K command palette
+- **Real-time Sync**: Live updates across all devices
 
-### **Frontend**
-- **Next.js 15**: React framework with App Router
-- **TypeScript**: Strict type safety throughout
-- **Tailwind CSS**: Utility-first styling with custom design system
-- **Framer Motion**: Smooth animations and micro-interactions
-- **shadcn/ui**: Premium UI components
+---
 
-### **Backend**
-- **Next.js API Routes**: Full-stack React framework
-- **PostgreSQL**: Robust relational database
-- **Drizzle ORM**: Type-safe database operations
-- **NextAuth.js v5**: Secure authentication system
+## 🚀 Tech Stack
 
-### **Infrastructure**
-- **Vercel**: Deployment and hosting
-- **AWS S3**: File storage for media uploads
-- **Resend**: Transactional email service
-- **OpenAI**: AI coaching and insights
+Built with modern, production-ready technologies:
 
-### **Development**
-- **ESLint**: Code linting and quality
-- **Prettier**: Code formatting
-- **Husky**: Git hooks for quality gates
-- **TypeScript**: Static type checking
+| Category | Technology | Purpose |
+|----------|------------|---------|
+| **Frontend** | Next.js 14 + TypeScript | React framework with server components |
+| **Styling** | Tailwind CSS + shadcn/ui | Utility-first CSS with beautiful components |
+| **Database** | Neon PostgreSQL + Drizzle ORM | Serverless database with type-safe queries |
+| **Authentication** | NextAuth.js | Secure authentication with multiple providers |
+| **AI/ML** | OpenAI GPT-4 | AI coach and workout generation |
+| **Animations** | Framer Motion | Smooth, professional animations |
+| **Deployment** | Vercel | Edge functions and global CDN |
+| **Monitoring** | Sentry | Error tracking and performance monitoring |
 
-## 🚀 Getting Started
+---
+
+## 📸 Screenshots
+
+*Coming soon - Premium interface screenshots showcasing the dark theme and Polish red accents*
+
+### 🏠 Landing Page
+- Universal sports showcase with 12+ sport icons
+- Premium hero section with "Your Sport. Your Platform."
+- Social proof from diverse athletes across all disciplines
+
+### 📊 Dashboard
+- Clean, breathing space with minimalist design
+- Real-time metrics and progress visualization
+- AI-generated insights and recommendations
+
+### 📅 Calendar
+- Unified view of all training and competitions
+- Multi-sport event management
+- Training load visualization
+
+---
+
+## ⚡️ Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
-- PostgreSQL 14+
-- npm/yarn/pnpm
+- Node.js 18+ and npm
+- PostgreSQL database (we recommend [Neon](https://neon.tech))
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/athlocontact00-code/athlo.git
-   cd athlo
-   ```
+```bash
+# Clone the repository
+git clone https://github.com/athlo/athlo.git
+cd athlo
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+# Install dependencies
+npm install
 
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env.local
-   # Edit .env.local with your database and API keys
-   ```
+# Set up environment variables
+cp .env.example .env.local
+```
 
-4. **Set up the database**
-   ```bash
-   # Run migrations
-   npm run db:migrate
-   
-   # Seed development data (optional)
-   npm run db:seed
-   ```
+### Environment Setup
 
-5. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-
-6. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-### Quick Start Commands
+Create your `.env.local` file with:
 
 ```bash
-# Development
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-
 # Database
-npm run db:generate  # Generate migrations
-npm run db:migrate   # Run migrations
-npm run db:studio    # Open Drizzle Studio
+DATABASE_URL="postgresql://username:password@host:port/database"
 
-# Code Quality
-npm run lint         # Run ESLint
-npm run type-check   # Run TypeScript check
-npm run format       # Format code with Prettier
+# Authentication
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-secret-key"
+
+# OAuth Providers (optional)
+GITHUB_CLIENT_ID="your-github-client-id"
+GITHUB_CLIENT_SECRET="your-github-client-secret"
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+# AI Features
+OPENAI_API_KEY="your-openai-api-key"
+
+# Integrations (optional)
+STRAVA_CLIENT_ID="your-strava-client-id"
+STRAVA_CLIENT_SECRET="your-strava-client-secret"
+GARMIN_CLIENT_ID="your-garmin-client-id"
+GARMIN_CLIENT_SECRET="your-garmin-client-secret"
 ```
 
-## 📁 Project Structure
-
-```
-src/
-├── app/                    # Next.js App Router pages
-│   ├── (auth)/            # Authentication pages
-│   ├── (dashboard)/       # Protected dashboard pages
-│   ├── api/               # API routes
-│   ├── globals.css        # Global styles
-│   └── layout.tsx         # Root layout
-├── components/            # React components
-│   ├── ui/               # shadcn/ui components
-│   ├── layout/           # Navigation and layout
-│   ├── dashboard/        # Dashboard-specific components
-│   ├── calendar/         # Calendar components
-│   ├── diary/            # Check-in and diary components
-│   ├── training/         # Workout components
-│   ├── messages/         # Communication components
-│   ├── ai-coach/         # AI coaching interface
-│   └── common/           # Shared components
-├── lib/                   # Utilities and configurations
-│   ├── db/               # Database schema and connection
-│   ├── auth/             # Authentication config
-│   ├── utils.ts          # Utility functions
-│   ├── constants.ts      # App constants
-│   └── types.ts          # TypeScript types
-└── hooks/                # Custom React hooks
-```
-
-## 🎨 Design System
-
-ATHLO uses a premium dark theme inspired by WHOOP's aesthetic with Polish national colors:
-
-- **Primary**: Polish Red (#dc2626) - CTAs and primary actions
-- **Accent**: Polish White (#ffffff) - Text and highlights
-- **Background**: Near-black gradients for premium feel
-- **Cards**: Dark grays with subtle borders
-- **Typography**: Inter font family for clarity
-
-### Color Palette
-```css
-/* Polish National Colors */
---primary: #dc2626;        /* Polish Red */
---accent: #ffffff;         /* Polish White */
-
-/* Dark Theme Base */
---background: #0f172a;     /* Deep background */
---card: #1e293b;           /* Card backgrounds */
---muted: #334155;          /* Muted elements */
-
-/* Status Colors */
---success: #10b981;        /* Green */
---warning: #f59e0b;        /* Amber */
---info: #3b82f6;           /* Blue */
-```
-
-## 🧪 Testing
+### Database Setup
 
 ```bash
-# Unit tests
-npm run test
+# Set up the database schema
+npm run db:push
 
-# E2E tests
-npm run test:e2e
-
-# Coverage
-npm run test:coverage
+# Seed with initial data (optional)
+npm run db:seed
 ```
 
-## 🚢 Deployment
+### Development
 
-### Vercel (Recommended)
-1. Connect your GitHub repository to Vercel
-2. Add environment variables in Vercel dashboard
-3. Deploy automatically on git push
-
-### Docker
 ```bash
-# Build image
-docker build -t athlo .
+# Start the development server
+npm run dev
 
-# Run container
-docker run -p 3000:3000 athlo
+# Open http://localhost:3000 in your browser
 ```
 
-### Manual Deployment
+### Building for Production
+
 ```bash
-# Build production bundle
+# Build the application
 npm run build
 
 # Start production server
 npm start
 ```
 
-## 🤝 Contributing
+---
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+## 🌍 Deployment
 
-### Development Workflow
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Make changes and add tests
-4. Commit your changes: `git commit -m 'Add amazing feature'`
-5. Push to the branch: `git push origin feature/amazing-feature`
-6. Open a Pull Request
+### Deploy to Vercel (Recommended)
 
-### Code Standards
-- TypeScript strict mode
-- ESLint configuration compliance
-- Comprehensive testing (unit + integration)
-- Mobile-first responsive design
-- Accessibility (WCAG 2.1 AA)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/athlo/athlo)
 
-## 📜 License
+1. Click the deploy button above
+2. Connect your GitHub account
+3. Add your environment variables in the Vercel dashboard
+4. Deploy!
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+### Manual Deployment
 
-## 🙏 Acknowledgments
+```bash
+# Build the application
+npm run build
 
-- Polish engineering excellence 🇵🇱
-- Open source community
-- Athletes worldwide across every sport
-- Coach feedback and insights
-
-## 📞 Support
-
-- 📧 Email: support@athlo.com
-- 💬 Discord: [Join our community](https://discord.gg/athlo)
-- 📚 Documentation: [docs.athlo.com](https://docs.athlo.com)
-- 🐛 Issues: [GitHub Issues](https://github.com/athlocontact00-code/athlo/issues)
+# The .next folder contains the production build
+# Deploy to your preferred hosting provider
+```
 
 ---
 
-**Built with ❤️ in Poland for athletes worldwide**
+## 📁 Project Structure
 
-*ATHLO - Elevate Your Performance*
+```
+athlo/
+├── src/
+│   ├── app/                    # Next.js 14 app directory
+│   │   ├── (auth)/            # Authentication pages
+│   │   ├── (dashboard)/       # Dashboard pages
+│   │   ├── (marketing)/       # Marketing pages
+│   │   └── api/               # API routes
+│   ├── components/            # React components
+│   │   ├── ui/                # shadcn/ui components
+│   │   ├── common/            # Shared components
+│   │   ├── dashboard/         # Dashboard components
+│   │   └── training/          # Training-specific components
+│   ├── hooks/                 # Custom React hooks
+│   ├── lib/                   # Utility libraries
+│   │   ├── ai/                # AI/ML utilities
+│   │   ├── db/                # Database configuration
+│   │   └── utils.ts           # Helper functions
+│   └── types/                 # TypeScript type definitions
+├── public/                    # Static assets
+├── docs/                      # Documentation
+└── package.json
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Here's how to get started:
+
+### Development Workflow
+
+1. **Fork** the repository
+2. **Clone** your fork locally
+3. **Create** a new branch: `git checkout -b feature/amazing-feature`
+4. **Make** your changes and test thoroughly
+5. **Commit** with descriptive messages: `git commit -m "✨ Add amazing feature"`
+6. **Push** to your branch: `git push origin feature/amazing-feature`
+7. **Open** a Pull Request
+
+### Code Style
+
+- We use **TypeScript** for type safety
+- **ESLint** and **Prettier** for code formatting
+- Follow the existing **component structure** and **naming conventions**
+- Write **meaningful commit messages** with emojis ✨
+
+### Areas We Need Help
+
+- 🌍 **Internationalization**: Multi-language support
+- 🏃‍♂️ **Sport Integrations**: New fitness platform APIs
+- 🎨 **UI/UX**: Design improvements and animations
+- 🔧 **Performance**: Optimization and caching
+- 📚 **Documentation**: Guides and API documentation
+
+---
+
+## 📚 Documentation
+
+- **[User Guide](docs/user-guide.md)** - Complete user documentation
+- **[API Reference](docs/api-reference.md)** - REST API documentation
+- **[Component Library](docs/components.md)** - React component documentation
+- **[Deployment Guide](docs/deployment.md)** - Advanced deployment options
+
+---
+
+## 🏆 Roadmap
+
+### Phase 8: Advanced Features
+- [ ] AI workout generation improvements
+- [ ] Advanced analytics dashboard
+- [ ] Team performance insights
+- [ ] Mobile app (React Native)
+
+### Phase 9: Integrations
+- [ ] Fitness+ and Apple Health
+- [ ] MyFitnessPal nutrition sync
+- [ ] Zwift virtual training
+- [ ] TrainerRoad integration
+
+### Phase 10: Enterprise
+- [ ] White-label solutions
+- [ ] Advanced team management
+- [ ] Custom branding options
+- [ ] Enterprise SSO
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 💖 Acknowledgments
+
+- **shadcn/ui** for the beautiful component library
+- **Vercel** for the amazing deployment platform
+- **Neon** for the serverless PostgreSQL database
+- The **Next.js team** for the incredible framework
+- All our **beta testers** and **contributors**
+
+---
+
+<div align="center">
+  
+  **Built with ❤️ in Poland 🇵🇱**
+  
+  [![Star us on GitHub](https://img.shields.io/github/stars/athlo/athlo?style=social)](https://github.com/athlo/athlo)
+  [![Follow on Twitter](https://img.shields.io/twitter/follow/athlo_app?style=social)](https://twitter.com/athlo_app)
+  
+  ---
+  
+  **ATHLO** © 2025 - Elevate Every Athlete
+  
+</div>
