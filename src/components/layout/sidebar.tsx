@@ -71,6 +71,7 @@ const navigationItems: NavigationItem[] = [
     label: 'AI Coach',
     href: '/dashboard/ai-coach',
     icon: Bot,
+    badge: -1, // Special badge for "New"
     description: 'AI-powered coaching',
   },
   {
@@ -122,8 +123,8 @@ export function Sidebar({ className, collapsed = false }: SidebarProps) {
                   "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                   "group relative",
                   isActive 
-                    ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm" 
-                    : "text-sidebar-foreground"
+                    ? "bg-primary/10 text-primary border-l-4 border-primary pl-2 shadow-sm" 
+                    : "text-sidebar-foreground border-l-4 border-transparent"
                 )}
               >
                 <Icon className={cn(
@@ -138,7 +139,7 @@ export function Sidebar({ className, collapsed = false }: SidebarProps) {
                         variant="secondary" 
                         className="ml-auto text-xs bg-primary text-primary-foreground"
                       >
-                        {item.badge}
+                        {item.badge === -1 ? "New" : item.badge}
                       </Badge>
                     )}
                   </>
@@ -163,8 +164,10 @@ export function Sidebar({ className, collapsed = false }: SidebarProps) {
           className={cn(
             "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
             "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-            "text-sidebar-foreground group relative",
-            pathname === '/dashboard/settings' && "bg-sidebar-primary text-sidebar-primary-foreground"
+            "text-sidebar-foreground group relative border-l-4",
+            pathname === '/dashboard/settings' 
+              ? "bg-primary/10 text-primary border-primary pl-2" 
+              : "border-transparent"
           )}
         >
           <Settings className="flex-shrink-0 w-5 h-5" />

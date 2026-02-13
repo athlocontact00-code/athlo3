@@ -31,6 +31,7 @@ interface ReadinessData {
 interface ReadinessScoreProps {
   className?: string;
   data?: ReadinessData;
+  size?: 'normal' | 'large';
   onCheckIn?: () => void;
 }
 
@@ -78,13 +79,15 @@ function getTrendIcon(trend: string) {
 export function ReadinessScore({ 
   className, 
   data = mockData,
+  size = 'normal',
   onCheckIn 
 }: ReadinessScoreProps) {
   const scoreColor = getScoreColor(data.score);
   const scoreLabel = getScoreLabel(data.score);
   
   // Calculate the stroke dasharray for the circular progress
-  const circumference = 2 * Math.PI * 45; // radius of 45
+  const radius = size === 'large' ? 55 : 45;
+  const circumference = 2 * Math.PI * radius;
   const strokeDasharray = circumference;
   const strokeDashoffset = circumference - (data.score / 100) * circumference;
 
@@ -108,25 +111,34 @@ export function ReadinessScore({
       <CardContent className="space-y-6">
         {/* Main Score Display */}
         <div className="flex items-center justify-center">
-          <div className="relative w-32 h-32">
-            <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 100 100">
+          <div className={cn(
+            "relative",
+            size === 'large' ? "w-40 h-40" : "w-32 h-32"
+          )}>
+            <svg 
+              className={cn(
+                "transform -rotate-90",
+                size === 'large' ? "w-40 h-40" : "w-32 h-32"
+              )} 
+              viewBox="0 0 120 120"
+            >
               {/* Background circle */}
               <circle
-                cx="50"
-                cy="50"
-                r="45"
+                cx="60"
+                cy="60"
+                r={radius}
                 stroke="currentColor"
-                strokeWidth="8"
+                strokeWidth={size === 'large' ? "10" : "8"}
                 fill="transparent"
                 className="text-muted/30"
               />
               {/* Progress circle */}
               <circle
-                cx="50"
-                cy="50"
-                r="45"
+                cx="60"
+                cy="60"
+                r={radius}
                 stroke="currentColor"
-                strokeWidth="8"
+                strokeWidth={size === 'large' ? "10" : "8"}
                 fill="transparent"
                 strokeDasharray={strokeDasharray}
                 strokeDashoffset={strokeDashoffset}
@@ -136,10 +148,17 @@ export function ReadinessScore({
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">
-                <div className={cn("text-3xl font-bold", scoreColor.color)}>
+                <div className={cn(
+                  "font-bold",
+                  size === 'large' ? "text-4xl" : "text-3xl",
+                  scoreColor.color
+                )}>
                   {data.score}
                 </div>
-                <div className="text-xs text-muted-foreground">
+                <div className={cn(
+                  "text-muted-foreground",
+                  size === 'large' ? "text-sm" : "text-xs"
+                )}>
                   /100
                 </div>
               </div>

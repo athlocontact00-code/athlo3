@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { PWAInitializer } from "@/components/pwa/pwa-initializer";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -153,6 +154,15 @@ export default function RootLayout({
         <div id="app" className="min-h-screen">
           {children}
         </div>
+        
+        {/* Toast notifications */}
+        <Toaster 
+          position="top-right"
+          theme="dark"
+          richColors
+          closeButton
+          duration={3000}
+        />
         
         {/* Install prompt and update notifications will be handled by PWA components */}
         <div id="pwa-prompts" />

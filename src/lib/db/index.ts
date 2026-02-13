@@ -1,12 +1,11 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
 import * as schema from './schema';
 
-// Database connection
+// Database connection for serverless (Vercel + Neon)
 const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/athlo';
 
-// Disable prefetch as it is not supported for "Transaction" pool mode
-const client = postgres(connectionString, { prepare: false });
-export const db = drizzle(client, { schema });
+const sql = neon(connectionString);
+export const db = drizzle(sql, { schema });
 
 export * from './schema';
