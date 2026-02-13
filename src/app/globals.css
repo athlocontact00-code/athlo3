@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'Inter', var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-athlo-red-500: #dc2626;
+  --color-athlo-red-600: #b91c1c;
+  --color-athlo-red-700: #991b1b;
+  --color-athlo-black-900: #0f172a;
+  --color-athlo-black-800: #1e293b;
+  --color-athlo-black-700: #334155;
+  --color-athlo-success: #10b981;
+  --color-athlo-warning: #f59e0b;
+  --color-athlo-info: #3b82f6;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/* ATHLO Premium Dark Theme - Default Dark */
+:root {
+  --radius: 0.5rem;
+  /* Dark theme by default - WHOOP-inspired */
+  --background: oklch(0.11 0 0);        /* Deep black background */
+  --foreground: oklch(0.98 0 0);        /* Pure white text */
+  --card: oklch(0.16 0 0);              /* Dark gray cards */
+  --card-foreground: oklch(0.95 0 0);   /* Light text on cards */
+  --popover: oklch(0.16 0 0);
+  --popover-foreground: oklch(0.95 0 0);
+  
+  /* Polish Red as Primary Accent */
+  --primary: oklch(0.57 0.22 25);       /* Polish Red #dc2626 */
+  --primary-foreground: oklch(0.98 0 0); /* White on red */
+  
+  --secondary: oklch(0.22 0 0);         /* Slightly lighter than cards */
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.20 0 0);             /* Muted elements */
+  --muted-foreground: oklch(0.65 0 0);  /* Subtle text */
+  --accent: oklch(0.98 0 0);            /* White accent */
+  --accent-foreground: oklch(0.11 0 0); /* Dark on white */
+  
+  /* State colors */
+  --destructive: oklch(0.57 0.22 25);   /* Same as primary red */
+  --destructive-foreground: oklch(0.98 0 0);
+  
+  /* Border and inputs */
+  --border: oklch(0.25 0 0);            /* Subtle borders */
+  --input: oklch(0.18 0 0);             /* Input backgrounds */
+  --ring: oklch(0.57 0.22 25);          /* Focus ring - Polish red */
+  
+  /* Chart colors - Polish theme */
+  --chart-1: oklch(0.57 0.22 25);       /* Polish Red */
+  --chart-2: oklch(0.95 0 0);           /* Polish White */
+  --chart-3: oklch(0.65 0.15 140);      /* Success Green */
+  --chart-4: oklch(0.75 0.15 85);       /* Warning Yellow */
+  --chart-5: oklch(0.60 0.18 260);      /* Info Blue */
+  
+  /* Sidebar - Dark theme */
+  --sidebar: oklch(0.13 0 0);           /* Slightly lighter than background */
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-primary: oklch(0.57 0.22 25); /* Polish Red */
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.18 0 0);
+  --sidebar-accent-foreground: oklch(0.90 0 0);
+  --sidebar-border: oklch(0.22 0 0);
+  --sidebar-ring: oklch(0.57 0.22 25);
+}
+
+/* Light theme override (optional - keeping dark as primary) */
+.light {
+  --background: oklch(0.98 0 0);        /* Light background for contrast */
+  --foreground: oklch(0.11 0 0);        /* Dark text */
+  --card: oklch(0.95 0 0);              /* Light cards */
+  --card-foreground: oklch(0.11 0 0);
+  --popover: oklch(0.98 0 0);
+  --popover-foreground: oklch(0.11 0 0);
+  
+  /* Keep Polish red as primary */
+  --primary: oklch(0.57 0.22 25);       /* Polish Red */
+  --primary-foreground: oklch(0.98 0 0);
+  
+  --secondary: oklch(0.92 0 0);
+  --secondary-foreground: oklch(0.11 0 0);
+  --muted: oklch(0.94 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.92 0 0);
+  --accent-foreground: oklch(0.11 0 0);
+  
+  --destructive: oklch(0.57 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  
+  --border: oklch(0.88 0 0);
+  --input: oklch(0.92 0 0);
+  --ring: oklch(0.57 0.22 25);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  
+  /* Custom scrollbar for premium feel */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/30;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/60 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/80;
+  }
+}
+
+/* ATHLO Custom Animations */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { 
+    transform: translateY(10px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateY(0); 
+    opacity: 1; 
+  }
+}
+
+@keyframes slide-in-right {
+  from { 
+    transform: translateX(-10px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
+}
+
+@keyframes scale-in {
+  from { 
+    transform: scale(0.95); 
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px oklch(0.57 0.22 25 / 0.5); 
+  }
+  50% { 
+    box-shadow: 0 0 20px oklch(0.57 0.22 25 / 0.8), 0 0 30px oklch(0.57 0.22 25 / 0.4); 
+  }
+}
+
+/* Utility classes for ATHLO */
+.athlo-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.athlo-gradient {
+  background: linear-gradient(135deg, oklch(0.57 0.22 25) 0%, oklch(0.45 0.18 25) 100%);
+}
