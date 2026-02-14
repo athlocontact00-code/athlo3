@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { PremiumCard } from '@/components/common/premium-card';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { 
@@ -65,7 +65,7 @@ function getTrendIcon(trend: string, size = 'w-4 h-4') {
 
 function getRampRateColor(rampRate: number) {
   if (rampRate > 20) return 'text-red-500';
-  if (rampRate > 10) return 'text-yellow-500';
+  if (rampRate > 10) return 'text-amber-500';
   if (rampRate > -10) return 'text-green-500';
   if (rampRate > -20) return 'text-blue-500';
   return 'text-red-500';
@@ -80,37 +80,36 @@ export function WeeklyLoadChart({
   const currentDate = new Date().toLocaleDateString('en', { weekday: 'short' }).slice(0, 3);
 
   return (
-    <Card className={className}>
-      <CardHeader className="pb-4">
-        <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <Activity className="w-5 h-5 text-primary" />
-            Weekly Load
-          </CardTitle>
-          <div className="flex items-center gap-2">
-            {getTrendIcon(metrics.trend)}
-            <Badge 
-              variant="outline" 
-              className={cn(
-                "text-xs",
-                getRampRateColor(metrics.rampRate)
-              )}
-            >
-              {metrics.rampRate > 0 ? '+' : ''}{metrics.rampRate}%
-            </Badge>
-          </div>
+    <PremiumCard className={className}>
+      {/* Chart Header */}
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+          <Activity className="w-5 h-5 text-primary" />
+          Weekly Load
+        </h3>
+        <div className="flex items-center gap-2">
+          {getTrendIcon(metrics.trend)}
+          <Badge 
+            variant="outline" 
+            className={cn(
+              "text-xs border-border/50",
+              getRampRateColor(metrics.rampRate)
+            )}
+          >
+            {metrics.rampRate > 0 ? '+' : ''}{metrics.rampRate}%
+          </Badge>
         </div>
-      </CardHeader>
+      </div>
 
-      <CardContent className="space-y-6">
+      <div className="space-y-6">
         {/* Chart */}
         <div className="space-y-4">
           <div className="flex justify-between text-xs text-muted-foreground">
             <span>This Week</span>
-            <span>{metrics.currentWeek} TSS</span>
+            <span className="font-mono font-bold">{metrics.currentWeek} TSS</span>
           </div>
           
-          <div className="space-y-2">
+          <div className="space-y-3">
             {data.map((day, index) => {
               const isToday = day.date === currentDate;
               const plannedPercent = (day.plannedLoad / maxLoad) * 100;
@@ -119,49 +118,49 @@ export function WeeklyLoadChart({
               const isMissed = day.plannedLoad > 0 && day.actualLoad === 0;
 
               return (
-                <div key={day.date} className="space-y-1">
+                <div key={day.date} className="space-y-2">
                   <div className="flex items-center justify-between text-xs">
                     <span className={cn(
-                      "font-medium",
-                      isToday && "text-primary",
+                      "font-medium w-8",
+                      isToday && "text-primary font-semibold",
                       isCompleted && "text-green-500",
                       isMissed && "text-red-500"
                     )}>
                       {day.date}
                     </span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 text-muted-foreground">
                       {day.workouts > 0 && (
-                        <span className="text-muted-foreground">
-                          {day.workouts} workout{day.workouts > 1 ? 's' : ''}
+                        <span>
+                          {day.workouts}
                         </span>
                       )}
-                      <span className="font-medium">
+                      <span className="font-mono font-bold text-foreground min-w-[3ch]">
                         {day.actualLoad || day.plannedLoad}
                       </span>
                     </div>
                   </div>
                   
-                  <div className="relative h-3 bg-muted rounded-full overflow-hidden">
-                    {/* Planned Load (background) */}
+                  <div className="relative h-2 bg-border/20 rounded-full overflow-hidden">
+                    {/* Planned Load (background) - very subtle */}
                     <div 
-                      className="absolute top-0 left-0 h-full bg-primary/30 transition-all duration-300"
+                      className="absolute top-0 left-0 h-full bg-muted/60 transition-all duration-300 ease-out"
                       style={{ width: `${plannedPercent}%` }}
                     />
                     
-                    {/* Actual Load */}
+                    {/* Actual Load - primary colors */}
                     <div 
                       className={cn(
-                        "absolute top-0 left-0 h-full transition-all duration-300",
+                        "absolute top-0 left-0 h-full transition-all duration-300 ease-out rounded-full",
                         isCompleted && "bg-green-500",
-                        isMissed && "bg-red-500/60",
+                        isMissed && "bg-red-500/70",
                         !isCompleted && !isMissed && "bg-primary"
                       )}
                       style={{ width: `${actualPercent}%` }}
                     />
                     
-                    {/* Today indicator */}
+                    {/* Today indicator - subtle glow */}
                     {isToday && (
-                      <div className="absolute inset-0 border-2 border-primary rounded-full" />
+                      <div className="absolute inset-0 border border-primary/60 rounded-full shadow-glow" />
                     )}
                   </div>
                 </div>
@@ -170,48 +169,48 @@ export function WeeklyLoadChart({
           </div>
         </div>
 
-        {/* Legend */}
-        <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
-          <div className="flex items-center gap-1">
-            <div className="w-3 h-3 bg-primary/30 rounded-full" />
+        {/* Inline Legend - minimal design */}
+        <div className="flex items-center justify-center gap-6 text-xs text-muted-foreground">
+          <div className="flex items-center gap-1.5">
+            <div className="w-2 h-2 bg-muted/60 rounded-full" />
             <span>Planned</span>
           </div>
-          <div className="flex items-center gap-1">
-            <div className="w-3 h-3 bg-green-500 rounded-full" />
+          <div className="flex items-center gap-1.5">
+            <div className="w-2 h-2 bg-green-500 rounded-full" />
             <span>Completed</span>
           </div>
-          <div className="flex items-center gap-1">
-            <div className="w-3 h-3 bg-red-500/60 rounded-full" />
+          <div className="flex items-center gap-1.5">
+            <div className="w-2 h-2 bg-red-500/70 rounded-full" />
             <span>Missed</span>
           </div>
         </div>
 
-        {/* Metrics */}
-        <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-foreground">
+        {/* Metrics - clean layout */}
+        <div className="grid grid-cols-2 gap-6 pt-6 border-t border-border/30">
+          <div className="text-center space-y-1">
+            <div className="text-2xl font-bold font-mono text-foreground">
               {metrics.currentWeek}
             </div>
             <div className="text-xs text-muted-foreground">This Week</div>
           </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-muted-foreground">
+          <div className="text-center space-y-1">
+            <div className="text-2xl font-bold font-mono text-muted-foreground">
               {metrics.previousWeek}
             </div>
             <div className="text-xs text-muted-foreground">Last Week</div>
           </div>
         </div>
 
-        {/* Recommendation */}
+        {/* Recommendation - premium styling */}
         {metrics.recommendation && (
-          <div className="flex gap-2 p-3 bg-muted/30 rounded-lg">
+          <div className="flex gap-3 p-4 bg-muted/20 border border-border/30 rounded-lg">
             <Info className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
             <p className="text-sm text-foreground">
               {metrics.recommendation}
             </p>
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </PremiumCard>
   );
 }

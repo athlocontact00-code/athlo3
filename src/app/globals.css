@@ -1,45 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-
-/* Premium micro-details */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Focus states for accessibility */
-*:focus-visible {
-  outline: 2px solid #dc2626;
-  outline-offset: 2px;
-}
-
-/* Hover effects for cards */
-.card-hover:hover {
-  transform: scale(1.02);
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-}
-
-/* Loading animation for skeleton */
-.skeleton {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: loading 1.5s infinite;
-}
-
-@keyframes loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-/* Premium shadows and gradients */
-.premium-shadow {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-.premium-gradient {
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -95,111 +57,146 @@ html {
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
-/* ATHLO Premium Dark Theme - Default Dark */
+/* ATHLO Premium Color System - Dark & Red DNA 🇵🇱 */
 :root {
-  --radius: 0.5rem;
-  /* Dark theme by default - WHOOP-inspired */
-  --background: oklch(0.11 0 0);        /* Deep black background */
+  --radius: 0.75rem; /* 12px - Design system default */
+  
+  /* Dark theme by default - WHOOP/Spotify-inspired */
+  --background: oklch(0.11 0 0);        /* Deep black background #1a1a1a */
   --foreground: oklch(0.98 0 0);        /* Pure white text */
-  --card: oklch(0.16 0 0);              /* Dark gray cards */
+  --card: oklch(0.15 0 0);              /* Dark gray cards #262626 */
   --card-foreground: oklch(0.95 0 0);   /* Light text on cards */
-  --popover: oklch(0.16 0 0);
+  --popover: oklch(0.15 0 0);
   --popover-foreground: oklch(0.95 0 0);
   
-  /* Polish Red as Primary Accent */
-  --primary: oklch(0.57 0.22 25);       /* Polish Red #dc2626 */
+  /* Polish Red as Primary Brand Color */
+  --primary: oklch(0.55 0.22 25);       /* ATHLO Red #dc2626 */
   --primary-foreground: oklch(0.98 0 0); /* White on red */
   
-  --secondary: oklch(0.22 0 0);         /* Slightly lighter than cards */
+  --secondary: oklch(0.20 0 0);         /* Slightly lighter than cards */
   --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.20 0 0);             /* Muted elements */
-  --muted-foreground: oklch(0.65 0 0);  /* Subtle text */
+  --muted: oklch(0.18 0 0);             /* Muted elements */
+  --muted-foreground: oklch(0.60 0 0);  /* Subtle text */
   --accent: oklch(0.98 0 0);            /* White accent */
   --accent-foreground: oklch(0.11 0 0); /* Dark on white */
   
-  /* State colors */
-  --destructive: oklch(0.57 0.22 25);   /* Same as primary red */
+  /* Destructive states use brand red */
+  --destructive: oklch(0.55 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
   
-  /* Border and inputs */
-  --border: oklch(0.25 0 0);            /* Subtle borders */
-  --input: oklch(0.18 0 0);             /* Input backgrounds */
-  --ring: oklch(0.57 0.22 25);          /* Focus ring - Polish red */
+  /* Borders and inputs */
+  --border: oklch(0.25 0 0);            /* Subtle borders #404040 */
+  --input: oklch(0.17 0 0);             /* Input backgrounds */
+  --ring: oklch(0.55 0.22 25);          /* Focus ring - ATHLO red */
   
-  /* Chart colors - Polish theme */
-  --chart-1: oklch(0.57 0.22 25);       /* Polish Red */
-  --chart-2: oklch(0.95 0 0);           /* Polish White */
-  --chart-3: oklch(0.65 0.15 140);      /* Success Green */
-  --chart-4: oklch(0.75 0.15 85);       /* Warning Yellow */
-  --chart-5: oklch(0.60 0.18 260);      /* Info Blue */
+  /* Chart colors - Professional palette */
+  --chart-1: oklch(0.55 0.22 25);       /* Primary Red */
+  --chart-2: oklch(0.60 0.20 220);      /* Blue - fitness */
+  --chart-3: oklch(0.65 0.18 140);      /* Green - recovery */
+  --chart-4: oklch(0.70 0.18 75);       /* Amber - warning */
+  --chart-5: oklch(0.58 0.20 285);      /* Purple - performance */
   
-  /* Sidebar - Dark theme */
-  --sidebar: oklch(0.13 0 0);           /* Slightly lighter than background */
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.57 0.22 25); /* Polish Red */
+  /* Sidebar - Premium dark */
+  --sidebar: oklch(0.13 0 0);           /* Slightly lighter than bg */
+  --sidebar-foreground: oklch(0.90 0 0);
+  --sidebar-primary: oklch(0.55 0.22 25);
   --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.18 0 0);
-  --sidebar-accent-foreground: oklch(0.90 0 0);
+  --sidebar-accent: oklch(0.17 0 0);
+  --sidebar-accent-foreground: oklch(0.85 0 0);
   --sidebar-border: oklch(0.22 0 0);
-  --sidebar-ring: oklch(0.57 0.22 25);
+  --sidebar-ring: oklch(0.55 0.22 25);
 }
 
-/* Light theme override (optional - keeping dark as primary) */
+/* Light theme (optional - keeping dark as default) */
 .light {
-  --background: oklch(0.98 0 0);        /* Light background for contrast */
-  --foreground: oklch(0.11 0 0);        /* Dark text */
-  --card: oklch(0.95 0 0);              /* Light cards */
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.11 0 0);
+  --card: oklch(0.95 0 0);
   --card-foreground: oklch(0.11 0 0);
   --popover: oklch(0.98 0 0);
   --popover-foreground: oklch(0.11 0 0);
-  
-  /* Keep Polish red as primary */
-  --primary: oklch(0.57 0.22 25);       /* Polish Red */
+  --primary: oklch(0.55 0.22 25);
   --primary-foreground: oklch(0.98 0 0);
-  
   --secondary: oklch(0.92 0 0);
   --secondary-foreground: oklch(0.11 0 0);
   --muted: oklch(0.94 0 0);
   --muted-foreground: oklch(0.45 0 0);
   --accent: oklch(0.92 0 0);
   --accent-foreground: oklch(0.11 0 0);
-  
-  --destructive: oklch(0.57 0.22 25);
+  --destructive: oklch(0.55 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
-  
   --border: oklch(0.88 0 0);
   --input: oklch(0.92 0 0);
-  --ring: oklch(0.57 0.22 25);
+  --ring: oklch(0.55 0.22 25);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-none;
+    box-sizing: border-box;
+  }
+  
+  html {
+    /* Smooth scroll behavior - premium feel */
+    scroll-behavior: smooth;
+    /* Enable hardware acceleration */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
   
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    /* Better font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Prevent horizontal overflow */
+    overflow-x: hidden;
   }
   
-  /* Custom scrollbar for premium feel */
+  /* Premium custom scrollbar - thin, dark, red accent */
   ::-webkit-scrollbar {
-    @apply w-2;
+    @apply w-1.5; /* 6px - thin */
   }
   
   ::-webkit-scrollbar-track {
-    @apply bg-muted/30;
+    @apply bg-transparent;
   }
   
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary/60 rounded-full;
+    @apply bg-border rounded-full;
+    transition: background-color 150ms ease;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary/80;
+    @apply bg-primary/70; /* Red on hover */
+  }
+  
+  /* Selection color - red highlight */
+  ::selection {
+    background-color: oklch(0.55 0.22 25 / 0.3); /* Semi-transparent red */
+    color: white;
+  }
+  
+  ::-moz-selection {
+    background-color: oklch(0.55 0.22 25 / 0.3);
+    color: white;
+  }
+  
+  /* Focus-visible styles - red outline */
+  *:focus-visible {
+    outline: 2px solid oklch(0.55 0.22 25);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  /* Remove focus styles from mouse users */
+  *:focus:not(:focus-visible) {
+    outline: none;
   }
 }
 
-/* ATHLO Custom Animations */
+/* ATHLO Premium Animations */
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -238,39 +235,147 @@ html {
   }
 }
 
-@keyframes pulse-glow {
+/* Pulse glow animation for highlights */
+@keyframes glow {
   0%, 100% { 
-    box-shadow: 0 0 5px oklch(0.57 0.22 25 / 0.5); 
+    box-shadow: 0 0 5px oklch(0.55 0.22 25 / 0.4); 
   }
   50% { 
-    box-shadow: 0 0 20px oklch(0.57 0.22 25 / 0.8), 0 0 30px oklch(0.57 0.22 25 / 0.4); 
+    box-shadow: 
+      0 0 20px oklch(0.55 0.22 25 / 0.6), 
+      0 0 30px oklch(0.55 0.22 25 / 0.3),
+      0 0 40px oklch(0.55 0.22 25 / 0.1); 
   }
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: -468px 0;
+  0% { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
+}
+
+/* Card hover animation - premium lift */
+@keyframes card-lift {
+  from { 
+    transform: translateY(0px);
+    box-shadow: var(--tw-shadow, 0 0 transparent);
   }
-  100% {
-    background-position: 468px 0;
+  to { 
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.15), 0 4px 6px -2px rgb(0 0 0 / 0.1);
   }
 }
 
-/* Utility classes for ATHLO */
-.athlo-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+/* ATHLO Utility Classes */
+
+/* Glass morphism effect */
+.glass {
+  background: oklch(0.15 0 0 / 0.8);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid oklch(0.25 0 0 / 0.5);
 }
 
-.athlo-gradient {
-  background: linear-gradient(135deg, oklch(0.57 0.22 25) 0%, oklch(0.45 0.18 25) 100%);
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, oklch(0.55 0.22 25) 0%, oklch(0.98 0 0) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
+/* Pulse glow utility */
+.pulse-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  cursor: pointer;
+}
+
+.card-hover:hover {
+  animation: card-lift 150ms ease forwards;
+}
+
+/* Premium button transitions */
+button, .btn, [role="button"] {
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Premium input transitions */
+input, textarea, select {
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading shimmer */
 .shimmer {
   background: linear-gradient(90deg, 
-    hsl(var(--muted)) 25%, 
-    hsl(var(--muted) / 0.8) 50%, 
-    hsl(var(--muted)) 75%
+    oklch(0.18 0 0) 25%, 
+    oklch(0.22 0 0) 50%, 
+    oklch(0.18 0 0) 75%
   );
   background-size: 400% 100%;
   animation: shimmer 1.2s ease-in-out infinite;
+}
+
+/* Premium shadow utilities */
+.shadow-premium {
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+.shadow-glow {
+  box-shadow: 
+    0 0 0 1px oklch(0.55 0.22 25 / 0.2), 
+    0 4px 16px oklch(0.55 0.22 25 / 0.12);
+}
+
+/* Page transition classes */
+.page-enter {
+  animation: fade-in 300ms ease, slide-up 300ms ease;
+}
+
+.section-enter {
+  animation: fade-in 500ms ease;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  button, [role="button"], a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Reduce motion for mobile */
+  .card-hover:hover {
+    transform: none;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: oklch(0.40 0 0);
+    --muted-foreground: oklch(0.70 0 0);
+  }
+}
+
+/* Dark mode image adjustments */
+@media (prefers-color-scheme: dark) {
+  img:not([src*=".svg"]) {
+    filter: brightness(0.9) contrast(1.1);
+  }
 }

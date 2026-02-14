@@ -23,7 +23,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { PremiumCard } from '@/components/common/premium-card';
 import { Input } from '@/components/ui/input';
 import { Avatar } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -244,19 +244,19 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 p-4 md:p-6 max-w-4xl mx-auto">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold">Settings</h1>
-        <p className="text-muted-foreground">
+      <div className="space-y-2">
+        <h1 className="text-2xl font-bold text-foreground">Settings</h1>
+        <p className="text-sm text-muted-foreground">
           Manage your account preferences and application settings
         </p>
       </div>
 
       {/* Profile Section */}
-      <Card className="p-6">
-        <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-          <User className="w-5 h-5" />
+      <PremiumCard>
+        <h2 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+          <User className="w-5 h-5 text-primary" />
           Profile
         </h2>
         
@@ -282,7 +282,7 @@ export default function SettingsPage() {
           {/* Basic Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Name</label>
+              <label className="block text-sm font-medium text-foreground mb-2">Name</label>
               <Input
                 value={profile.name}
                 onChange={(e) => handleProfileUpdate('name', e.target.value)}
@@ -343,13 +343,13 @@ export default function SettingsPage() {
             </div>
           </div>
         </div>
-      </Card>
+      </PremiumCard>
 
       {/* Training Zones */}
-      <Card className="p-6">
+      <PremiumCard>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold flex items-center gap-2">
-            <Calculator className="w-5 h-5" />
+          <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
+            <Calculator className="w-5 h-5 text-primary" />
             Training Zones
           </h2>
           <Button variant="outline" size="sm" className="gap-2">
@@ -401,13 +401,13 @@ export default function SettingsPage() {
             </div>
           </div>
         </div>
-      </Card>
+      </PremiumCard>
 
       {/* Season Goals */}
-      <Card className="p-6">
+      <PremiumCard>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold flex items-center gap-2">
-            <Target className="w-5 h-5" />
+          <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
+            <Target className="w-5 h-5 text-primary" />
             Season Goals
           </h2>
           <Button variant="outline" size="sm" onClick={addGoal} className="gap-2">
@@ -445,12 +445,12 @@ export default function SettingsPage() {
         <p className="text-xs text-muted-foreground mt-4">
           A = Major goal race, B = Important race, C = Fun/training race
         </p>
-      </Card>
+      </PremiumCard>
 
       {/* Integrations */}
-      <Card className="p-6">
-        <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-          <Link className="w-5 h-5" />
+      <PremiumCard>
+        <h2 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+          <Link className="w-5 h-5 text-primary" />
           Integrations
         </h2>
         
@@ -486,12 +486,12 @@ export default function SettingsPage() {
             </div>
           ))}
         </div>
-      </Card>
+      </PremiumCard>
 
       {/* Notifications */}
-      <Card className="p-6">
-        <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-          <Bell className="w-5 h-5" />
+      <PremiumCard>
+        <h2 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+          <Bell className="w-5 h-5 text-primary" />
           Notification Preferences
         </h2>
         
@@ -552,11 +552,11 @@ export default function SettingsPage() {
             </div>
           ))}
         </div>
-      </Card>
+      </PremiumCard>
 
       {/* App Preferences */}
-      <Card className="p-6">
-        <h2 className="text-xl font-semibold mb-6">App Preferences</h2>
+      <PremiumCard>
+        <h2 className="text-lg font-semibold text-foreground mb-6">App Preferences</h2>
         
         <div className="space-y-6">
           {/* Language */}
@@ -620,11 +620,11 @@ export default function SettingsPage() {
             </Button>
           </div>
         </div>
-      </Card>
+      </PremiumCard>
 
       {/* Data Management */}
-      <Card className="p-6">
-        <h2 className="text-xl font-semibold mb-6">Data Management</h2>
+      <PremiumCard>
+        <h2 className="text-lg font-semibold text-foreground mb-6">Data Management</h2>
         
         <div className="space-y-4">
           <div className="flex items-center justify-between p-4 rounded-lg border border-border/40">
@@ -662,12 +662,12 @@ export default function SettingsPage() {
             </Button>
           </div>
         </div>
-      </Card>
+      </PremiumCard>
 
       {/* Delete Account Confirmation Dialog */}
       {showDeleteDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-md p-6">
+          <PremiumCard className="w-full max-w-md">
             <h3 className="text-lg font-semibold mb-4 text-red-400">Delete Account</h3>
             <p className="text-sm text-muted-foreground mb-6">
               This action cannot be undone. This will permanently delete your account and remove all your data from our servers.
@@ -687,7 +687,7 @@ export default function SettingsPage() {
                 Delete Forever
               </Button>
             </div>
-          </Card>
+          </PremiumCard>
         </div>
       )}
     </div>

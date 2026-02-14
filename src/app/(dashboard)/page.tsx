@@ -1,185 +1,406 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MessageSquare, TrendingUp, Target, Zap } from 'lucide-react';
-import { FocusDayCard } from '@/components/dashboard/focus-day-card';
-import { ReadinessScore } from '@/components/dashboard/readiness-score';
-import { MentalReadinessRadar } from '@/components/dashboard/mental-readiness-radar';
-import { InjuryRiskGauge } from '@/components/dashboard/injury-risk-gauge';
-import { QuickActions } from '@/components/dashboard/quick-actions';
-import { WeeklyLoadChart } from '@/components/dashboard/weekly-load-chart';
-import { TrainingHeatmapMini } from '@/components/dashboard/training-heatmap-mini';
-import { AIInsightCard } from '@/components/dashboard/ai-insight-card';
+import { 
+  Activity, 
+  Plus, 
+  MessageSquare, 
+  Bot,
+  CheckCircle,
+  Calendar,
+  TrendingUp,
+  Zap,
+  ArrowRight,
+  Clock,
+  Target
+} from 'lucide-react';
+import { PremiumCard, MetricCard } from '@/components/common/premium-card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
 
+// Animation variants with staggered delays
 const container = {
   hidden: { opacity: 0 },
   show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
+    opacity: 1
   }
 };
 
+const containerTransition = {
+  staggerChildren: 0.1,
+  delayChildren: 0.05
+};
+
 const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
+  hidden: { opacity: 0, y: 10 },
+  show: { 
+    opacity: 1, 
+    y: 0
+  }
+};
+
+// Mock data - in real app this would come from APIs
+const mockData = {
+  user: {
+    name: 'Bartek',
+    readinessScore: 78,
+    readinessStatus: "You're well recovered. Ready for intensity."
+  },
+  todaysWorkouts: [
+    { 
+      id: 1, 
+      name: 'Interval Training', 
+      duration: '45 min', 
+      zone: 'Z4-Z5',
+      type: 'run',
+      completed: false 
+    },
+    { 
+      id: 2, 
+      name: 'Core Strength', 
+      duration: '20 min', 
+      zone: 'Recovery',
+      type: 'strength',
+      completed: false 
+    },
+  ],
+  weeklyLoad: [65, 82, 78, 90, 85, 72, 88], // 7 days of load
+  recentInsights: [
+    {
+      title: 'Your running efficiency is improving',
+      summary: '8% improvement in pace per heart rate this month',
+      timestamp: '2 hours ago'
+    },
+    {
+      title: 'Recovery trending upward',
+      summary: 'HRV shows positive adaptation to training load',
+      timestamp: '1 day ago'
+    }
+  ],
+  lastMessage: {
+    from: 'Coach Anna',
+    preview: 'Great session yesterday! Ready for intervals?',
+    timestamp: '2 hours ago'
+  }
 };
 
 export default function DashboardPage() {
-  const handleCheckIn = () => {
-    // Navigate to check-in flow
-    window.location.href = '/dashboard/diary?action=checkin';
-  };
-
-  // Get time-based greeting
+  // Dynamic greeting based on time
   const getGreeting = () => {
     const hour = new Date().getHours();
-    const name = "Bartek"; // In real app, get from user context
+    const name = mockData.user.name;
     
     if (hour < 12) return `Good morning, ${name}`;
     if (hour < 17) return `Good afternoon, ${name}`;
     return `Good evening, ${name}`;
   };
 
-  // Mock AI insights
-  const aiInsights = [
-    {
-      type: 'performance' as const,
-      title: 'Your running efficiency is improving',
-      description: 'Your pace per heart rate has improved by 8% over the last month.',
-      priority: 'high' as const,
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2) // 2 hours ago
-    },
-    {
-      type: 'recovery' as const,
-      title: 'Consider a rest day tomorrow',
-      description: 'Your HRV shows signs of accumulated fatigue. A recovery day would be optimal.',
-      priority: 'medium' as const,
-      timestamp: new Date(Date.now() - 1000 * 60 * 30) // 30 minutes ago
-    }
-  ];
+  // Get readiness color
+  const getReadinessColor = (score: number) => {
+    if (score >= 80) return 'text-green-500';
+    if (score >= 60) return 'text-amber-500';
+    return 'text-red-500';
+  };
+
+  // Current date formatting
+  const getCurrentDate = () => {
+    return new Date().toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  };
 
   return (
     <motion.div 
-      className="p-4 md:p-6 space-y-6"
+      className="p-4 md:p-6 max-w-7xl mx-auto"
       variants={container}
+      transition={containerTransition}
       initial="hidden"
       animate="show"
     >
-      {/* Greeting Header */}
-      <motion.div variants={item} className="space-y-1">
-        <h1 className="text-2xl md:text-3xl font-bold text-foreground">{getGreeting()}</h1>
-        <p className="text-muted-foreground">
-          Ready to conquer {new Date().toLocaleDateString('en', { 
-            weekday: 'long', 
-            month: 'long', 
-            day: 'numeric' 
-          })}?
+      {/* Greeting Section */}
+      <motion.div variants={item} className="mb-6 space-y-2">
+        <h1 className="text-2xl font-bold text-foreground">
+          {getGreeting()}
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          {getCurrentDate()}
         </p>
       </motion.div>
 
-      {/* Row 1: Readiness Metrics */}
-      <motion.div variants={item} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-        {/* Readiness Score - Large */}
-        <div className="md:col-span-1">
-          <ReadinessScore 
-            className="h-full"
-            size="large"
-            onCheckIn={handleCheckIn}
-          />
-        </div>
-
-        {/* Mental Readiness Radar */}
-        <div className="hidden md:block">
-          <MentalReadinessRadar className="h-full" />
-        </div>
-
-        {/* Injury Risk Gauge */}
-        <div className="hidden xl:block">
-          <InjuryRiskGauge className="h-full" />
-        </div>
-      </motion.div>
-
-      {/* Row 2: Focus Day + Quick Actions */}
-      <motion.div variants={item} className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-        {/* Focus Day Card */}
-        <div className="lg:col-span-2">
-          <FocusDayCard className="h-full" />
-        </div>
-
-        {/* Quick Actions */}
-        <div>
-          <QuickActions className="h-full" />
-        </div>
-      </motion.div>
-
-      {/* Row 3: Weekly Load + Training Heatmap */}
-      <motion.div variants={item} className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
-        {/* Weekly Load Chart */}
-        <WeeklyLoadChart className="h-full" />
-
-        {/* Training Heatmap Mini */}
-        <TrainingHeatmapMini className="h-full" />
-      </motion.div>
-
-      {/* Row 4: AI Insights + Messages */}
-      <motion.div variants={item} className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-        {/* Recent AI Insights */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="flex items-center gap-2 mb-4">
-            <Zap className="h-5 w-5 text-primary" />
-            <h3 className="text-lg font-semibold text-foreground">Recent Insights</h3>
-          </div>
-          <div className="space-y-3">
-            {aiInsights.map((insight, index) => (
-              <AIInsightCard 
-                key={index} 
-                insight={insight}
-                compact 
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Unread Messages */}
-        <div className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:shadow-lg transition-all duration-300">
-          <div className="flex items-center gap-3 mb-4">
-            <MessageSquare className="h-5 w-5 text-primary" />
-            <h3 className="text-lg font-semibold text-foreground">Messages</h3>
-            <div className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full">
-              3
-            </div>
-          </div>
-          
-          <div className="space-y-3">
-            <div className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
-              <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-foreground truncate">Coach Anna</p>
-                <p className="text-xs text-muted-foreground truncate">Great job on yesterday's workout! Ready for...</p>
-                <p className="text-xs text-muted-foreground mt-1">2 hours ago</p>
+      <div className="space-y-6">
+        {/* Hero Card - Today's Readiness */}
+        <motion.div variants={item}>
+          <PremiumCard variant="elevated" accentColor="primary">
+            <div className="flex items-center justify-between">
+              <div className="space-y-3">
+                <div className="space-y-1">
+                  <h2 className="text-lg font-semibold text-foreground">
+                    Today's Readiness
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    {mockData.user.readinessStatus}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="text-right">
+                <div className={`text-4xl font-bold font-mono ${getReadinessColor(mockData.user.readinessScore)}`}>
+                  {mockData.user.readinessScore}
+                </div>
+                <div className="text-sm text-muted-foreground mt-1">
+                  out of 100
+                </div>
               </div>
             </div>
             
-            <div className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
-              <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-foreground truncate">Training Group</p>
-                <p className="text-xs text-muted-foreground truncate">Who's joining the long run tomorrow?</p>
-                <p className="text-xs text-muted-foreground mt-1">5 hours ago</p>
+            {/* Circular Progress Bar */}
+            <div className="mt-4">
+              <div className="w-full bg-muted rounded-full h-2">
+                <div 
+                  className="bg-primary h-2 rounded-full transition-all duration-500"
+                  style={{ width: `${mockData.user.readinessScore}%` }}
+                />
               </div>
             </div>
+          </PremiumCard>
+        </motion.div>
+
+        {/* Desktop Two-Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="space-y-6">
+            {/* Today's Plan */}
+            <motion.div variants={item}>
+              <PremiumCard>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                    <Calendar className="h-5 w-5 text-primary" />
+                    Today's Plan
+                  </h3>
+                  <Link href="/dashboard/plan">
+                    <Button variant="ghost" size="sm" className="text-xs">
+                      View all
+                      <ArrowRight className="ml-1 h-3 w-3" />
+                    </Button>
+                  </Link>
+                </div>
+                
+                <div className="space-y-3">
+                  {mockData.todaysWorkouts.map((workout) => (
+                    <div key={workout.id} className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+                      <div className={`w-2 h-2 rounded-full ${
+                        workout.type === 'run' ? 'bg-blue-500' : 
+                        workout.type === 'strength' ? 'bg-orange-500' : 'bg-gray-400'
+                      }`} />
+                      
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-foreground truncate">
+                          {workout.name}
+                        </p>
+                        <div className="flex items-center gap-3 mt-1">
+                          <span className="text-xs text-muted-foreground flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            {workout.duration}
+                          </span>
+                          <Badge variant="secondary" className="text-xs">
+                            {workout.zone}
+                          </Badge>
+                        </div>
+                      </div>
+                      
+                      <Button size="sm" variant="outline" className="flex-shrink-0">
+                        Start
+                      </Button>
+                    </div>
+                  ))}
+                  
+                  {mockData.todaysWorkouts.length === 0 && (
+                    <div className="text-center py-6 text-muted-foreground">
+                      <Target className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                      <p className="text-sm">No workouts planned for today</p>
+                    </div>
+                  )}
+                </div>
+              </PremiumCard>
+            </motion.div>
+
+            {/* Quick Actions */}
+            <motion.div variants={item}>
+              <PremiumCard>
+                <h3 className="text-lg font-semibold text-foreground mb-4">
+                  Quick Actions
+                </h3>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  <Button 
+                    variant="outline" 
+                    className="h-auto p-4 flex-col gap-2 hover:bg-accent/50"
+                    asChild
+                  >
+                    <Link href="/dashboard/diary?action=checkin">
+                      <CheckCircle className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-sm font-medium">Check-in</span>
+                    </Link>
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="h-auto p-4 flex-col gap-2 hover:bg-accent/50"
+                    asChild
+                  >
+                    <Link href="/dashboard/plan?action=add">
+                      <Plus className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-sm font-medium">Add Workout</span>
+                    </Link>
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="h-auto p-4 flex-col gap-2 hover:bg-accent/50"
+                    asChild
+                  >
+                    <Link href="/dashboard/messages">
+                      <MessageSquare className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-sm font-medium">Message Coach</span>
+                    </Link>
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="h-auto p-4 flex-col gap-2 hover:bg-accent/50"
+                    asChild
+                  >
+                    <Link href="/dashboard/ai-coach">
+                      <Bot className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-sm font-medium">AI Coach</span>
+                    </Link>
+                  </Button>
+                </div>
+              </PremiumCard>
+            </motion.div>
           </div>
 
-          <button 
-            onClick={() => window.location.href = '/dashboard/messages'}
-            className="w-full mt-4 p-2 bg-primary/10 hover:bg-primary/20 text-primary text-sm font-medium rounded-lg transition-colors"
-          >
-            View all messages
-          </button>
+          <div className="space-y-6">
+            {/* Weekly Snapshot */}
+            <motion.div variants={item}>
+              <PremiumCard>
+                <div className="flex items-center gap-2 mb-4">
+                  <TrendingUp className="h-5 w-5 text-primary" />
+                  <h3 className="text-lg font-semibold text-foreground">
+                    Weekly Snapshot
+                  </h3>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-end gap-1 h-20 px-2">
+                    {mockData.weeklyLoad.map((load, index) => {
+                      const isToday = index === new Date().getDay();
+                      return (
+                        <div key={index} className="flex-1 flex flex-col items-center gap-1">
+                          <div 
+                            className={`w-full rounded-sm transition-all duration-300 ${
+                              isToday ? 'bg-primary' : 'bg-muted hover:bg-muted/80'
+                            }`}
+                            style={{ 
+                              height: `${(load / Math.max(...mockData.weeklyLoad)) * 100}%`,
+                              minHeight: '4px'
+                            }}
+                          />
+                          <span className={`text-xs ${
+                            isToday ? 'text-primary font-medium' : 'text-muted-foreground'
+                          }`}>
+                            {['S', 'M', 'T', 'W', 'T', 'F', 'S'][index]}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  
+                  <div className="text-center">
+                    <p className="text-sm text-muted-foreground">
+                      Daily training load • This week
+                    </p>
+                  </div>
+                </div>
+              </PremiumCard>
+            </motion.div>
+
+            {/* Recent Insights */}
+            <motion.div variants={item}>
+              <PremiumCard>
+                <div className="flex items-center gap-2 mb-4">
+                  <Zap className="h-5 w-5 text-primary" />
+                  <h3 className="text-lg font-semibold text-foreground">
+                    Recent Insights
+                  </h3>
+                </div>
+                
+                <div className="space-y-3">
+                  {mockData.recentInsights.slice(0, 2).map((insight, index) => (
+                    <div key={index} className="p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors cursor-pointer group">
+                      <h4 className="text-sm font-medium text-foreground mb-1 group-hover:text-primary transition-colors">
+                        {insight.title}
+                      </h4>
+                      <p className="text-xs text-muted-foreground mb-2">
+                        {insight.summary}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-muted-foreground">
+                          {insight.timestamp}
+                        </span>
+                        <button className="text-xs text-primary hover:underline">
+                          Why?
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </PremiumCard>
+            </motion.div>
+
+            {/* Messages Preview */}
+            <motion.div variants={item}>
+              <PremiumCard>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                    <MessageSquare className="h-5 w-5 text-primary" />
+                    Messages
+                  </h3>
+                  <Link href="/dashboard/messages">
+                    <Button variant="ghost" size="sm" className="text-xs">
+                      View all
+                      <ArrowRight className="ml-1 h-3 w-3" />
+                    </Button>
+                  </Link>
+                </div>
+                
+                {mockData.lastMessage ? (
+                  <div className="p-3 rounded-lg bg-muted/30">
+                    <div className="flex items-start justify-between mb-2">
+                      <p className="text-sm font-medium text-foreground">
+                        {mockData.lastMessage.from}
+                      </p>
+                      <span className="text-xs text-muted-foreground">
+                        {mockData.lastMessage.timestamp}
+                      </span>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      {mockData.lastMessage.preview}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="text-center py-4 text-muted-foreground">
+                    <MessageSquare className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                    <p className="text-sm">No recent messages</p>
+                  </div>
+                )}
+              </PremiumCard>
+            </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }

@@ -183,11 +183,13 @@ export default function LandingPage() {
               <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
                 🇵🇱 Built in Poland with Pride
               </Badge>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
-                Your Sport.
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+                  ATHLO
+                </span>
                 <br />
-                <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-                  Your Platform.
+                <span className="text-2xl md:text-3xl lg:text-4xl font-medium text-muted-foreground">
+                  Universal Premium Sports Platform
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
