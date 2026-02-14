@@ -18,135 +18,188 @@ import {
   Play,
   Shield,
   Zap,
-  Dumbbell,
-  Timer,
+  Bot,
   Trophy,
-  Mountain,
-  Waves,
-  Bike,
-  Footprints,
-  Users2,
-  Sword,
-  CircleDot,
-  Flame,
-  Activity
+  Timer,
+  BarChart3,
+  Smartphone,
+  Globe,
+  Monitor,
+  Activity,
+  ChevronRight,
+  ArrowUpRight,
+  Check,
+  X
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { SPORTS, getPopularSports } from '@/lib/sports';
+
+const profileTypes = [
+  {
+    icon: Users,
+    emoji: '👨‍🏫',
+    title: "Coach",
+    description: 'Manage athletes and create world-class training programs',
+    features: ['Team Management', 'Plan Creation', 'Performance Analytics']
+  },
+  {
+    icon: Users,
+    emoji: '🏃',
+    title: "Athlete + Coach",
+    description: 'Train with professional coaching guidance on ATHLO',
+    features: ['Receive Plans', 'Report Data', 'Coach Communication']
+  },
+  {
+    icon: Trophy,
+    emoji: '💪',
+    title: "Solo Athlete",
+    description: 'Take full control of your training and health data',
+    features: ['Self-Managed', 'Data Tracking', 'Personal Analytics']
+  },
+  {
+    icon: Bot,
+    emoji: '🤖',
+    title: "AI Coach",
+    description: 'Get personalized guidance from ATHLO\'s intelligent AI',
+    features: ['AI Plans', 'Smart Guidance', 'Adaptive Training']
+  }
+];
 
 const features = [
   {
-    icon: Target,
-    title: 'Smart Planning',
-    description: 'AI-powered training plans tailored to every sport and every athlete',
+    title: 'Smart Training Plans',
+    description: 'AI-powered coaching that adapts to every sport and athlete',
+    bullets: [
+      'Sport-specific training methodologies',
+      'Adaptive periodization based on performance',
+      'Injury prevention and recovery integration'
+    ],
+    imageLeft: true
   },
   {
-    icon: Heart,
-    title: 'Daily Check-ins',
-    description: 'Universal readiness tracking with HRV, sleep, stress, and recovery metrics',
+    title: 'Daily Health Tracking',
+    description: 'Comprehensive readiness and recovery monitoring',
+    bullets: [
+      'HRV, sleep quality, and stress tracking',
+      'Universal readiness scores across all sports',
+      'Smart recovery recommendations'
+    ],
+    imageLeft: false
   },
   {
-    icon: Calendar,
-    title: 'Unified Calendar',
-    description: 'One calendar for all sports: training, competitions, events, and recovery',
+    title: 'AI-Powered Coaching',
+    description: 'Intelligent guidance that understands every discipline',
+    bullets: [
+      'Real-time form and technique analysis',
+      'Personalized nutrition and hydration advice',
+      'Performance prediction and optimization'
+    ],
+    imageLeft: true
   },
   {
-    icon: TrendingUp,
-    title: 'Progress Analytics',
-    description: 'Sport-agnostic performance insights with explainable AI analysis',
-  },
-  {
-    icon: MessageCircle,
     title: 'Team Communication',
-    description: 'Connect athletes and coaches across all disciplines with context',
-  },
-  {
-    icon: Brain,
-    title: 'AI Coach',
-    description: 'Personalized guidance for every sport, from running to martial arts',
-  },
-];
-
-const sports = [
-  { icon: Footprints, name: 'Running' },
-  { icon: Bike, name: 'Cycling' },
-  { icon: Waves, name: 'Swimming' },
-  { icon: Dumbbell, name: 'CrossFit' },
-  { icon: Users2, name: 'Football' },
-  { icon: Trophy, name: 'Basketball' },
-  { icon: Sword, name: 'MMA' },
-  { icon: Mountain, name: 'Climbing' },
-  { icon: CircleDot, name: 'Tennis' },
-  { icon: Timer, name: 'HYROX' },
-  { icon: Flame, name: 'Yoga' },
-  { icon: Activity, name: 'Triathlon' },
+    description: 'Seamless collaboration between athletes and coaches',
+    bullets: [
+      'Real-time messaging with training context',
+      'Team announcements and schedule updates',
+      'Progress sharing and feedback loops'
+    ],
+    imageLeft: false
+  }
 ];
 
 const testimonials = [
   {
-    name: 'Anna Kowalski',
-    role: 'Triathlete',
-    avatar: '/avatars/anna.jpg',
-    content: 'ATHLO transformed my training across all three disciplines. The unified approach helped me PR by 8 minutes.',
+    name: 'Anna Kowalska',
+    role: 'Professional Triathlete',
+    content: 'ATHLO transformed my training across swimming, cycling, and running. The unified approach helped me achieve a personal best and qualify for Ironman World Championships.',
     rating: 5,
   },
   {
     name: 'Marcus Johnson',
-    role: 'Football Coach',
-    avatar: '/avatars/marcus.jpg',
-    content: 'Managing team training sessions, individual players, and match preparation in one platform is revolutionary.',
+    role: 'Football Coach, FC Krakow',
+    content: 'Managing 25 players with individual training plans, team sessions, and match analysis has never been this streamlined. ATHLO is a game-changer for professional coaching.',
     rating: 5,
   },
   {
     name: 'Katarzyna Nowak',
-    role: 'CrossFit Athlete',
-    avatar: '/avatars/kat.jpg',
-    content: 'From weightlifting to cardio, ATHLO understands every movement and helps me optimize everything.',
+    role: 'CrossFit Regional Athlete',
+    content: 'From Olympic lifts to metabolic conditioning, ATHLO understands every movement pattern and helps me optimize every aspect of my training.',
     rating: 5,
+  }
+];
+
+const comparisonFeatures = [
+  { name: 'Multi-Sport Support', athlo: true, trainingpeaks: false, strava: false, whoop: false },
+  { name: 'AI Coaching', athlo: true, trainingpeaks: false, strava: false, whoop: false },
+  { name: 'Team Management', athlo: true, trainingpeaks: true, strava: false, whoop: false },
+  { name: 'Daily Readiness', athlo: true, trainingpeaks: false, strava: false, whoop: true },
+  { name: 'Advanced Analytics', athlo: true, trainingpeaks: true, strava: true, whoop: true },
+  { name: 'Custom Sports', athlo: true, trainingpeaks: false, strava: false, whoop: false },
+  { name: 'Real-time Communication', athlo: true, trainingpeaks: false, strava: false, whoop: false },
+  { name: 'Polish Design 🇵🇱', athlo: true, trainingpeaks: false, strava: false, whoop: false },
+];
+
+const pricingPlans = [
+  {
+    name: 'Free',
+    price: '0',
+    period: 'forever',
+    features: ['1 sport tracking', 'Basic analytics', 'Community access', '7-day history'],
+    cta: 'Start Free',
+    popular: false
   },
   {
-    name: 'Diego Martinez',
-    role: 'MMA Fighter',
-    avatar: '/avatars/diego.jpg',
-    content: 'Training striking, grappling, and conditioning - ATHLO handles the complexity so I can focus on fighting.',
-    rating: 5,
+    name: 'Pro',
+    price: '19',
+    period: '/month',
+    features: ['Unlimited sports', 'AI coaching', 'Advanced analytics', 'Team features', 'Unlimited history', 'Priority support'],
+    cta: 'Start Free Trial',
+    popular: true
   },
   {
-    name: 'Sarah Chen',
-    role: 'Yoga Instructor',
-    avatar: '/avatars/sarah.jpg',
-    content: 'Even for mind-body practices, ATHLO provides insights that help me and my students grow.',
-    rating: 5,
-  },
-  {
-    name: 'Coach Thompson',
-    role: 'Basketball Coach',
-    avatar: '/avatars/thompson.jpg',
-    content: 'Team management, player development, and game analysis - everything I need in one premium platform.',
-    rating: 5,
-  },
+    name: 'Coach',
+    price: '49',
+    period: '/month',
+    features: ['Everything in Pro', 'Unlimited athletes', 'Team management', 'Custom branding', 'API access', 'Dedicated support'],
+    cta: 'Start Free Trial',
+    popular: false
+  }
 ];
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
   transition: { duration: 0.6 }
 };
 
-const stagger = {
-  animate: {
+const staggerContainer = {
+  initial: {},
+  whileInView: {
     transition: {
       staggerChildren: 0.1
     }
   }
 };
 
+const staggerItem = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.5 }
+};
+
 export default function LandingPage() {
+  const popularSports = getPopularSports().slice(0, 12);
+  const extraSports = SPORTS.slice(12, 24);
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-hidden">
       {/* Navigation */}
       <motion.nav 
-        className="border-b border-border/40 bg-background/80 backdrop-blur-md sticky top-0 z-50"
+        className="relative z-50 border-b border-border/40 bg-background/80 backdrop-blur-md"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -154,233 +207,351 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Logo size="sm" />
-            <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="/features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Features
+              </Link>
+              <Link href="/pricing" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Pricing
+              </Link>
+              <Link href="/about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                About
+              </Link>
+            </div>
+            <div className="flex items-center gap-3">
               <Link href="/login">
-                <Button variant="ghost">Sign In</Button>
+                <Button variant="ghost" size="sm">Sign In</Button>
               </Link>
               <Link href="/register">
-                <Button>Get Started</Button>
+                <Button size="sm" className="bg-primary hover:bg-primary/90">
+                  Start Free
+                  <ArrowRight className="ml-1 w-3 h-3" />
+                </Button>
               </Link>
             </div>
           </div>
         </div>
       </motion.nav>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 lg:py-32">
+      {/* Hero Section - Full Viewport */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
-        <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-20 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-60" />
+        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-60" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-primary/10 to-transparent rounded-full opacity-30" />
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="mb-8"
-            >
-              <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
-                🇵🇱 Built in Poland with Pride
-              </Badge>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
-                  ATHLO
-                </span>
-                <br />
-                <span className="text-2xl md:text-3xl lg:text-4xl font-medium text-muted-foreground">
-                  Universal Premium Sports Platform
-                </span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                The universal premium platform for every sport and every athlete. 
-                Advanced coaching tools, team communication, and AI insights 
-                designed for serious athletes and coaches across all disciplines.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
-            >
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <Badge variant="outline" className="mb-8 border-primary/30 text-primary bg-primary/5 px-4 py-2">
+              🇵🇱 Built in Poland • Trusted by 15,000+ Athletes
+            </Badge>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8">
+              <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent">
+                Your Sport.
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+                Your Way.
+              </span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed">
+              The intelligent training platform that adapts to <strong>every athlete</strong>, <strong>every sport</strong>, <strong>every goal</strong>.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
               <Link href="/register">
-                <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90">
-                  Start Free Trial
-                  <ArrowRight className="ml-2 w-4 h-4" />
+                <Button size="lg" className="h-14 px-8 bg-primary hover:bg-primary/90 text-lg font-semibold shadow-lg hover:shadow-xl transition-all">
+                  Start Free
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                <Play className="mr-2 w-4 h-4" />
-                Watch Demo
+              <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-semibold">
+                <Play className="mr-2 w-5 h-5" />
+                See how it works
               </Button>
-            </motion.div>
+            </div>
 
-            {/* Stats */}
+            {/* Dashboard Mockup Preview */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 40, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="max-w-4xl mx-auto"
             >
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">15k+</div>
-                <div className="text-sm text-muted-foreground">Active Athletes</div>
+              <div className="bg-card/40 backdrop-blur-sm border border-border/50 rounded-2xl p-6 shadow-2xl">
+                <div className="bg-card border border-border/30 rounded-xl p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    </div>
+                    <div className="text-xs text-muted-foreground">ATHLO Dashboard</div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="bg-primary/10 rounded-lg p-4 text-center">
+                      <div className="text-2xl font-bold text-primary">8.5</div>
+                      <div className="text-xs text-muted-foreground">Readiness</div>
+                    </div>
+                    <div className="bg-green-500/10 rounded-lg p-4 text-center">
+                      <div className="text-2xl font-bold text-green-600">142</div>
+                      <div className="text-xs text-muted-foreground">Training Load</div>
+                    </div>
+                    <div className="bg-blue-500/10 rounded-lg p-4 text-center">
+                      <div className="text-2xl font-bold text-blue-600">5.2km</div>
+                      <div className="text-xs text-muted-foreground">Today's Run</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">1.2k+</div>
-                <div className="text-sm text-muted-foreground">Professional Coaches</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">2.5M+</div>
-                <div className="text-sm text-muted-foreground">Workouts Tracked</div>
-              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+        >
+          <div className="animate-bounce">
+            <ChevronRight className="w-6 h-6 text-muted-foreground rotate-90" />
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 4 Profile Cards - Built for Everyone */}
+      <section className="py-24 bg-muted/20 snap-start">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            {...fadeInUp}
+            className="text-center mb-16"
+          >
+            <Badge variant="outline" className="mb-4 border-primary/30 text-primary">
+              Built for Everyone
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Every Athlete. Every Coach.
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Whether you're training solo, working with a coach, or guiding athletes—ATHLO adapts to your role.
+            </p>
+          </motion.div>
+
+          {/* Desktop Grid, Mobile Scroll */}
+          <div className="md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6 flex md:block overflow-x-auto gap-4 pb-4 md:pb-0 snap-x snap-mandatory">
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true }}
+              className="contents"
+            >
+              {profileTypes.map((profile, index) => {
+                const Icon = profile.icon;
+                return (
+                  <motion.div
+                    key={profile.title}
+                    variants={staggerItem}
+                    className="flex-shrink-0 w-80 md:w-auto bg-card border border-border/50 rounded-2xl p-8 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 group snap-center"
+                  >
+                    <div className="text-center">
+                      <div className="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors">
+                        <span className="text-4xl">{profile.emoji}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                        {profile.title}
+                      </h3>
+                      <p className="text-muted-foreground mb-6 leading-relaxed">
+                        {profile.description}
+                      </p>
+                      <ul className="space-y-2">
+                        {profile.features.map((feature) => (
+                          <li key={feature} className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                            <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Sports Showcase */}
-      <section className="py-16 bg-muted/20">
+      {/* Features Showcase - Alternating Layout */}
+      <section className="py-24 snap-start">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            {...fadeInUp}
+            className="text-center mb-20"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              Built for Every Sport
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Everything You Need to Succeed
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Whether you're a weekend warrior or professional athlete, ATHLO adapts to your discipline
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Professional-grade tools that understand the nuances of every sport and training methodology.
+            </p>
+          </motion.div>
+
+          <div className="space-y-24">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                {...fadeInUp}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className={cn(
+                  "grid grid-cols-1 lg:grid-cols-2 gap-12 items-center",
+                  feature.imageLeft ? "lg:grid-flow-row" : "lg:grid-flow-row-dense"
+                )}
+              >
+                {/* Image Placeholder */}
+                <div className={cn(
+                  "aspect-[4/3] bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl border border-border/30 flex items-center justify-center",
+                  !feature.imageLeft && "lg:col-start-2"
+                )}>
+                  <div className="text-6xl opacity-20">
+                    {feature.title.includes('Training') && '📊'}
+                    {feature.title.includes('Health') && '❤️'}
+                    {feature.title.includes('AI') && '🤖'}
+                    {feature.title.includes('Communication') && '💬'}
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className={cn(
+                  "space-y-6",
+                  !feature.imageLeft && "lg:col-start-1 lg:row-start-1"
+                )}>
+                  <div>
+                    <h3 className="text-3xl font-bold text-foreground mb-4">
+                      {feature.title}
+                    </h3>
+                    <p className="text-xl text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
+                  <ul className="space-y-3">
+                    {feature.bullets.map((bullet) => (
+                      <li key={bullet} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sports Grid */}
+      <section className="py-24 bg-muted/20 snap-start">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            {...fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Every Sport. Every Athlete.
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              From endurance sports to combat disciplines, team games to individual pursuits—ATHLO speaks your sport's language.
             </p>
           </motion.div>
 
           <motion.div
-            variants={stagger}
+            variants={staggerContainer}
             initial="initial"
-            whileInView="animate"
+            whileInView="whileInView"
             viewport={{ once: true }}
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6"
+            className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4"
           >
-            {sports.map((sport, index) => {
+            {[...popularSports, ...extraSports].map((sport, index) => {
               const Icon = sport.icon;
               return (
                 <motion.div
-                  key={sport.name}
-                  variants={fadeInUp}
-                  className="flex flex-col items-center p-4 rounded-xl hover:bg-card/50 transition-colors group"
+                  key={sport.id}
+                  variants={staggerItem}
+                  className="aspect-square bg-card border border-border/30 rounded-xl flex flex-col items-center justify-center p-4 hover:border-primary/30 hover:shadow-lg transition-all group"
                 >
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
-                    <Icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <span className="text-sm font-medium text-foreground">{sport.name}</span>
+                  <span className="text-2xl mb-1">{sport.emoji}</span>
+                  <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors text-center">
+                    {sport.name}
+                  </span>
                 </motion.div>
               );
             })}
           </motion.div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Everything You Need
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Professional-grade tools that work across all sports, disciplines, and training methodologies.
-            </p>
-          </motion.div>
 
           <motion.div
-            variants={stagger}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            {...fadeInUp}
+            transition={{ delay: 0.5 }}
+            className="text-center mt-12"
           >
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <motion.div
-                  key={feature.title}
-                  variants={fadeInUp}
-                  className="bg-card border border-border rounded-xl p-6 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group"
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {feature.title}
-                    </h3>
-                  </div>
-                  <p className="text-muted-foreground">
-                    {feature.description}
-                  </p>
-                </motion.div>
-              );
-            })}
+            <div className="inline-flex items-center gap-2 text-muted-foreground">
+              <span className="text-lg">+ and many more sports</span>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Social Proof Section */}
-      <section className="py-20 bg-muted/30">
+      {/* Social Proof - Testimonials */}
+      <section className="py-24 snap-start">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            {...fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Trusted by Athletes Worldwide
             </h2>
             <p className="text-xl text-muted-foreground">
-              From recreational enthusiasts to professional athletes across every sport
+              From recreational enthusiasts to professional athletes across every discipline
             </p>
           </motion.div>
 
           <motion.div
-            variants={stagger}
+            variants={staggerContainer}
             initial="initial"
-            whileInView="animate"
+            whileInView="whileInView"
             viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {testimonials.map((testimonial, index) => (
+            {testimonials.map((testimonial) => (
               <motion.div
                 key={testimonial.name}
-                variants={fadeInUp}
-                className="bg-card border border-border rounded-xl p-6 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+                variants={staggerItem}
+                className="bg-card border border-border/50 rounded-2xl p-8 hover:shadow-xl hover:shadow-primary/5 transition-all"
               >
-                <div className="flex items-center gap-1 mb-4">
+                <div className="flex items-center gap-1 mb-6">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
                   ))}
                 </div>
-                <p className="text-foreground mb-4">"{testimonial.content}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
-                    <span className="text-sm font-semibold text-primary">
+                <blockquote className="text-foreground leading-relaxed mb-6">
+                  "{testimonial.content}"
+                </blockquote>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+                    <span className="text-sm font-bold text-white">
                       {testimonial.name.split(' ').map(n => n[0]).join('')}
                     </span>
                   </div>
                   <div>
-                    <div className="font-medium text-foreground">{testimonial.name}</div>
+                    <div className="font-semibold text-foreground">{testimonial.name}</div>
                     <div className="text-sm text-muted-foreground">{testimonial.role}</div>
                   </div>
                 </div>
@@ -390,159 +561,268 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary/5">
+      {/* Comparison Section - Why ATHLO? */}
+      <section className="py-24 bg-muted/20 snap-start">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            {...fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Why ATHLO?
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              See how we compare to other training platforms
+            </p>
+          </motion.div>
+
+          <motion.div
+            {...fadeInUp}
+            className="overflow-x-auto"
+          >
+            <table className="w-full bg-card rounded-2xl border border-border/50 shadow-xl overflow-hidden">
+              <thead>
+                <tr className="border-b border-border/30">
+                  <th className="text-left p-6 font-semibold text-foreground">Features</th>
+                  <th className="text-center p-6 bg-primary/5 border-l border-r border-primary/20">
+                    <div className="flex flex-col items-center">
+                      <Logo size="sm" />
+                      <Badge className="mt-1 bg-primary text-primary-foreground">ATHLO</Badge>
+                    </div>
+                  </th>
+                  <th className="text-center p-6 text-muted-foreground">TrainingPeaks</th>
+                  <th className="text-center p-6 text-muted-foreground">Strava</th>
+                  <th className="text-center p-6 text-muted-foreground">WHOOP</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonFeatures.map((feature) => (
+                  <tr key={feature.name} className="border-b border-border/20 hover:bg-muted/20 transition-colors">
+                    <td className="p-4 font-medium text-foreground">{feature.name}</td>
+                    <td className="p-4 text-center bg-primary/5 border-l border-r border-primary/10">
+                      {feature.athlo ? (
+                        <Check className="w-5 h-5 text-primary mx-auto" />
+                      ) : (
+                        <X className="w-5 h-5 text-muted-foreground mx-auto" />
+                      )}
+                    </td>
+                    <td className="p-4 text-center">
+                      {feature.trainingpeaks ? (
+                        <Check className="w-5 h-5 text-green-600 mx-auto" />
+                      ) : (
+                        <X className="w-5 h-5 text-muted-foreground mx-auto" />
+                      )}
+                    </td>
+                    <td className="p-4 text-center">
+                      {feature.strava ? (
+                        <Check className="w-5 h-5 text-green-600 mx-auto" />
+                      ) : (
+                        <X className="w-5 h-5 text-muted-foreground mx-auto" />
+                      )}
+                    </td>
+                    <td className="p-4 text-center">
+                      {feature.whoop ? (
+                        <Check className="w-5 h-5 text-green-600 mx-auto" />
+                      ) : (
+                        <X className="w-5 h-5 text-muted-foreground mx-auto" />
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Pricing Teaser */}
+      <section className="py-24 snap-start">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            {...fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Start free, upgrade when ready
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Choose the plan that fits your training journey
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {pricingPlans.map((plan) => (
+              <motion.div
+                key={plan.name}
+                variants={staggerItem}
+                className={cn(
+                  "bg-card border rounded-2xl p-8 relative",
+                  plan.popular 
+                    ? "border-primary shadow-xl shadow-primary/10 scale-105" 
+                    : "border-border/50 hover:border-primary/30 hover:shadow-lg transition-all"
+                )}
+              >
+                {plan.popular && (
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground">
+                    Most Popular
+                  </Badge>
+                )}
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
+                  <div className="flex items-baseline justify-center gap-1">
+                    <span className="text-4xl font-bold text-primary">${plan.price}</span>
+                    <span className="text-muted-foreground">{plan.period}</span>
+                  </div>
+                </div>
+                <ul className="space-y-4 mb-8">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link href="/register" className="block">
+                  <Button 
+                    className={cn(
+                      "w-full",
+                      plan.popular 
+                        ? "bg-primary hover:bg-primary/90" 
+                        : "variant-outline"
+                    )}
+                    variant={plan.popular ? "default" : "outline"}
+                  >
+                    {plan.cta}
+                  </Button>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-32 bg-gradient-to-br from-primary/5 via-background to-primary/10 snap-start">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            {...fadeInUp}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Elevate Every Athlete
+            <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-8">
+              Ready to transform
+              <br />
+              <span className="text-primary">your training?</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join the universal premium platform that's helping athletes and coaches across all sports achieve their greatest potential.
+            <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+              Join thousands of athletes and coaches who've already elevated their performance with ATHLO.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/register">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Start Your Free Trial
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-              <p className="text-sm text-muted-foreground">
-                <CheckCircle className="w-4 h-4 inline mr-1" />
-                14-day free trial, no credit card required
-              </p>
+            <Link href="/register">
+              <Button size="lg" className="h-16 px-12 text-xl font-bold bg-primary hover:bg-primary/90 shadow-xl hover:shadow-2xl transition-all">
+                Start Your Free Trial
+                <ArrowRight className="ml-3 w-6 h-6" />
+              </Button>
+            </Link>
+            <div className="flex items-center justify-center gap-6 mt-8 text-sm text-muted-foreground">
+              <span className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-primary" />
+                14-day free trial
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-primary" />
+                No credit card required
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-primary" />
+                Cancel anytime
+              </span>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-12 bg-muted/30">
+      <footer className="border-t border-border py-16 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-            {/* Logo and Description */}
-            <div className="lg:col-span-1">
-              <Logo size="sm" className="mb-4" />
-              <p className="text-sm text-muted-foreground mb-4">
-                The universal premium sports platform for every athlete and every sport. 
-                Professional coaching, team communication, and AI insights.
-              </p>
-              <div className="flex items-center gap-4">
-                <Link href="https://instagram.com/athlo" className="text-muted-foreground hover:text-primary transition-colors">
-                  <span className="sr-only">Instagram</span>
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.619 5.367 11.986 11.988 11.986s11.987-5.367 11.987-11.986C24.004 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.348-1.051-2.348-2.348s1.051-2.348 2.348-2.348 2.348 1.051 2.348 2.348-1.051 2.348-2.348 2.348zm7.718 0c-1.297 0-2.348-1.051-2.348-2.348s1.051-2.348 2.348-2.348 2.348 1.051 2.348 2.348-1.051 2.348-2.348 2.348z"/>
-                  </svg>
-                </Link>
-                <Link href="https://twitter.com/athlo" className="text-muted-foreground hover:text-primary transition-colors">
-                  <span className="sr-only">Twitter</span>
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                  </svg>
-                </Link>
-                <Link href="https://tiktok.com/@athlo" className="text-muted-foreground hover:text-primary transition-colors">
-                  <span className="sr-only">TikTok</span>
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
-                  </svg>
-                </Link>
-              </div>
-            </div>
-
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             {/* Product */}
             <div>
-              <h3 className="font-semibold text-foreground mb-4">Product</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/features" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Features
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/pricing" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Pricing
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/ai-coach" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    AI Coach
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/for-coaches" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    For Coaches
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/for-athletes" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    For Athletes
-                  </Link>
-                </li>
+              <h3 className="font-bold text-foreground mb-6">Product</h3>
+              <ul className="space-y-3">
+                <li><Link href="/features" className="text-muted-foreground hover:text-primary transition-colors">Features</Link></li>
+                <li><Link href="/pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</Link></li>
+                <li><Link href="/ai-coach" className="text-muted-foreground hover:text-primary transition-colors">AI Coach</Link></li>
+                <li><Link href="/integrations" className="text-muted-foreground hover:text-primary transition-colors">Integrations</Link></li>
+                <li><Link href="/api" className="text-muted-foreground hover:text-primary transition-colors">API</Link></li>
               </ul>
             </div>
 
             {/* Company */}
             <div>
-              <h3 className="font-semibold text-foreground mb-4">Company</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Blog
-                  </Link>
-                </li>
+              <h3 className="font-bold text-foreground mb-6">Company</h3>
+              <ul className="space-y-3">
+                <li><Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">About</Link></li>
+                <li><Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Contact</Link></li>
+                <li><Link href="/blog" className="text-muted-foreground hover:text-primary transition-colors">Blog</Link></li>
+                <li><Link href="/careers" className="text-muted-foreground hover:text-primary transition-colors">Careers</Link></li>
+                <li><Link href="/press" className="text-muted-foreground hover:text-primary transition-colors">Press</Link></li>
               </ul>
             </div>
 
             {/* Legal */}
             <div>
-              <h3 className="font-semibold text-foreground mb-4">Legal</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Terms of Service
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/cookies" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Cookie Policy
-                  </Link>
-                </li>
+              <h3 className="font-bold text-foreground mb-6">Legal</h3>
+              <ul className="space-y-3">
+                <li><Link href="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link></li>
+                <li><Link href="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/cookies" className="text-muted-foreground hover:text-primary transition-colors">Cookie Policy</Link></li>
+                <li><Link href="/security" className="text-muted-foreground hover:text-primary transition-colors">Security</Link></li>
+              </ul>
+            </div>
+
+            {/* Connect */}
+            <div>
+              <h3 className="font-bold text-foreground mb-6">Connect</h3>
+              <ul className="space-y-3">
+                <li><Link href="https://twitter.com/athlo" className="text-muted-foreground hover:text-primary transition-colors">Twitter</Link></li>
+                <li><Link href="https://instagram.com/athlo" className="text-muted-foreground hover:text-primary transition-colors">Instagram</Link></li>
+                <li><Link href="https://linkedin.com/company/athlo" className="text-muted-foreground hover:text-primary transition-colors">LinkedIn</Link></li>
+                <li><Link href="https://github.com/athlo" className="text-muted-foreground hover:text-primary transition-colors">GitHub</Link></li>
+                <li><Link href="/support" className="text-muted-foreground hover:text-primary transition-colors">Support</Link></li>
               </ul>
             </div>
           </div>
 
           <div className="border-t border-border pt-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-sm text-muted-foreground">
-                © 2025 ATHLO. All rights reserved.
-              </p>
-              <p className="text-sm text-muted-foreground flex items-center gap-1">
+              <div className="flex items-center gap-4">
+                <Logo size="sm" />
+                <p className="text-sm text-muted-foreground">
+                  © 2025 ATHLO. All rights reserved.
+                </p>
+              </div>
+              <p className="text-sm text-muted-foreground flex items-center gap-2">
                 Built with ❤️ in Poland 🇵🇱
               </p>
             </div>
           </div>
         </div>
       </footer>
+
+      {/* Smooth Scroll Style */}
+      <style jsx global>{`
+        html {
+          scroll-behavior: smooth;
+          scroll-snap-type: y mandatory;
+        }
+        section {
+          scroll-snap-align: start;
+        }
+      `}</style>
     </div>
   );
 }

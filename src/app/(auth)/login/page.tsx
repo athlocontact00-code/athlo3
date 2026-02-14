@@ -13,6 +13,7 @@ import {
   Eye, 
   EyeOff,
   ArrowLeft,
+  ArrowRight,
   Chrome,
   Apple,
   Github
@@ -33,9 +34,28 @@ export default function LoginPage() {
     // Simulate login process
     setTimeout(() => {
       setIsLoading(false);
-      // Redirect to dashboard
-      window.location.href = '/dashboard';
+      // Redirect to today (main screen after login)
+      window.location.href = '/today';
     }, 1000);
+  };
+
+  const handleDemoLogin = () => {
+    // Set up demo profile
+    const demoProfile = {
+      profileType: 'athlete-solo',
+      name: 'Demo Athlete',
+      email: 'demo@athlo.com',
+      sports: ['running', 'cycling'],
+      experienceLevel: 'intermediate',
+      onboardingCompleted: true,
+    };
+    
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('athlo-user-profile', JSON.stringify(demoProfile));
+    }
+    
+    // Redirect to /today
+    window.location.href = '/today';
   };
 
   return (
@@ -199,21 +219,19 @@ export default function LoginPage() {
                 </Link>
               </div>
 
-              {/* Demo Account */}
-              <div className="text-center">
-                <div className="text-xs text-muted-foreground mb-2">
-                  Want to explore? Try the demo account:
+              {/* Demo Login */}
+              <div className="text-center space-y-3">
+                <div className="text-xs text-muted-foreground">
+                  Want to explore first?
                 </div>
                 <Button
+                  type="button"
                   variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    setEmail('demo@athlo.com');
-                    setPassword('demo123');
-                  }}
-                  className="text-xs"
+                  onClick={handleDemoLogin}
+                  className="w-full h-11 border-primary/20 hover:bg-primary/5"
                 >
-                  Fill Demo Credentials
+                  Demo Login
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
             </CardContent>

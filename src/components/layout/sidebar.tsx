@@ -45,22 +45,22 @@ const navigationSections: NavigationSection[] = [
     items: [
       {
         label: 'Today',
-        href: '/dashboard/today',
+        href: '/today',
         icon: Sun,
       },
       {
         label: 'Dashboard',
-        href: '/dashboard',
+        href: '/',
         icon: LayoutDashboard,
       },
       {
         label: 'Calendar',
-        href: '/dashboard/calendar',
+        href: '/calendar',
         icon: Calendar,
       },
       {
         label: 'Plan',
-        href: '/dashboard/plan',
+        href: '/plan',
         icon: Target,
       },
     ],
@@ -70,27 +70,27 @@ const navigationSections: NavigationSection[] = [
     items: [
       {
         label: 'Diary',
-        href: '/dashboard/diary',
+        href: '/diary',
         icon: BookOpen,
       },
       {
         label: 'Progress',
-        href: '/dashboard/progress',
+        href: '/progress',
         icon: TrendingUp,
       },
       {
         label: 'Status',
-        href: '/dashboard/status',
+        href: '/status',
         icon: Heart,
       },
       {
         label: 'Records',
-        href: '/dashboard/records',
+        href: '/records',
         icon: Trophy,
       },
       {
         label: 'History',
-        href: '/dashboard/history',
+        href: '/history',
         icon: History,
       },
     ],
@@ -100,18 +100,18 @@ const navigationSections: NavigationSection[] = [
     items: [
       {
         label: 'Messages',
-        href: '/dashboard/messages',
+        href: '/messages',
         icon: MessageCircle,
         unreadCount: 2, // Unread indicator (red dot, not number)
       },
       {
         label: 'Feed',
-        href: '/dashboard/feed',
+        href: '/feed',
         icon: Activity,
       },
       {
         label: 'AI Coach',
-        href: '/dashboard/ai-coach',
+        href: '/ai-coach',
         icon: Bot,
       },
     ],
@@ -121,18 +121,23 @@ const navigationSections: NavigationSection[] = [
     items: [
       {
         label: 'Settings',
-        href: '/dashboard/settings',
+        href: '/settings',
         icon: Settings,
       },
       {
         label: 'Billing',
-        href: '/dashboard/billing',
+        href: '/billing',
         icon: CreditCard,
       },
       {
         label: 'Profile',
-        href: '/dashboard/profile',
+        href: '/profile',
         icon: User,
+      },
+      {
+        label: 'Changelog',
+        href: '/changelog',
+        icon: History,
       },
     ],
   },
@@ -147,10 +152,10 @@ export function Sidebar({ className }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
 
   const isActive = (href: string) => {
-    if (href === '/dashboard') {
-      return pathname === '/dashboard';
+    if (href === '/') {
+      return pathname === '/';
     }
-    return pathname.startsWith(href);
+    return pathname === href;
   };
 
   return (
