@@ -420,13 +420,124 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-12">
+      <footer className="border-t border-border py-12 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <Logo size="sm" />
-            <p className="text-sm text-muted-foreground">
-              © 2025 ATHLO. Built with ❤️ in Poland 🇵🇱
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            {/* Logo and Description */}
+            <div className="lg:col-span-1">
+              <Logo size="sm" className="mb-4" />
+              <p className="text-sm text-muted-foreground mb-4">
+                The universal premium sports platform for every athlete and every sport. 
+                Professional coaching, team communication, and AI insights.
+              </p>
+              <div className="flex items-center gap-4">
+                <Link href="https://instagram.com/athlo" className="text-muted-foreground hover:text-primary transition-colors">
+                  <span className="sr-only">Instagram</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.619 5.367 11.986 11.988 11.986s11.987-5.367 11.987-11.986C24.004 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.348-1.051-2.348-2.348s1.051-2.348 2.348-2.348 2.348 1.051 2.348 2.348-1.051 2.348-2.348 2.348zm7.718 0c-1.297 0-2.348-1.051-2.348-2.348s1.051-2.348 2.348-2.348 2.348 1.051 2.348 2.348-1.051 2.348-2.348 2.348z"/>
+                  </svg>
+                </Link>
+                <Link href="https://twitter.com/athlo" className="text-muted-foreground hover:text-primary transition-colors">
+                  <span className="sr-only">Twitter</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </Link>
+                <Link href="https://tiktok.com/@athlo" className="text-muted-foreground hover:text-primary transition-colors">
+                  <span className="sr-only">TikTok</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Product */}
+            <div>
+              <h3 className="font-semibold text-foreground mb-4">Product</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/features" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Features
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pricing" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Pricing
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/ai-coach" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    AI Coach
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/for-coaches" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    For Coaches
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/for-athletes" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    For Athletes
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h3 className="font-semibold text-foreground mb-4">Company</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Blog
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div>
+              <h3 className="font-semibold text-foreground mb-4">Legal</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Terms of Service
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/cookies" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Cookie Policy
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-border pt-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <p className="text-sm text-muted-foreground">
+                © 2025 ATHLO. All rights reserved.
+              </p>
+              <p className="text-sm text-muted-foreground flex items-center gap-1">
+                Built with ❤️ in Poland 🇵🇱
+              </p>
+            </div>
           </div>
         </div>
       </footer>
