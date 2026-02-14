@@ -17,6 +17,7 @@ import {
 import { PremiumCard, MetricCard } from '@/components/common/premium-card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { QuoteOfDay } from '@/components/dashboard/quote-of-day';
 import Link from 'next/link';
 
 // Animation variants with staggered delays
@@ -279,6 +280,11 @@ export default function DashboardPage() {
                   </Button>
                 </div>
               </PremiumCard>
+            </motion.div>
+
+            {/* Quote of the Day */}
+            <motion.div variants={item}>
+              <QuoteOfDay />
             </motion.div>
           </div>
 

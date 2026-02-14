@@ -28,6 +28,7 @@ import { Input } from '@/components/ui/input';
 import { Avatar } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { NotificationSettings } from '@/components/settings/notification-settings';
 
 interface UserProfile {
   name: string;
@@ -489,70 +490,7 @@ export default function SettingsPage() {
       </PremiumCard>
 
       {/* Notifications */}
-      <PremiumCard>
-        <h2 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
-          <Bell className="w-5 h-5 text-primary" />
-          Notification Preferences
-        </h2>
-        
-        <div className="space-y-4">
-          {notifications.map(notification => (
-            <div key={notification.id} className="p-4 rounded-lg border border-border/40">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="checkbox"
-                      checked={notification.enabled}
-                      onChange={() => toggleNotification(notification.id)}
-                      className="w-4 h-4"
-                    />
-                    <div>
-                      <div className="font-medium">{notification.title}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {notification.description}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {notification.enabled && (
-                <div className="flex gap-4 ml-7">
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={notification.types.push}
-                      onChange={() => toggleNotification(notification.id, 'push')}
-                      className="w-3 h-3"
-                    />
-                    <Smartphone className="w-3 h-3" />
-                    Push
-                  </label>
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={notification.types.email}
-                      onChange={() => toggleNotification(notification.id, 'email')}
-                      className="w-3 h-3"
-                    />
-                    📧 Email
-                  </label>
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={notification.types.sms}
-                      onChange={() => toggleNotification(notification.id, 'sms')}
-                      className="w-3 h-3"
-                    />
-                    💬 SMS
-                  </label>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </PremiumCard>
+      <NotificationSettings />
 
       {/* App Preferences */}
       <PremiumCard>

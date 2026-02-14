@@ -5,12 +5,17 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Logo } from '@/components/common/logo';
 import { 
+  Sun,
   LayoutDashboard, 
   Calendar, 
   Target,
   BookOpen, 
-  TrendingUp, 
-  MessageCircle, 
+  TrendingUp,
+  Heart,
+  Trophy,
+  History,
+  MessageCircle,
+  Activity,
   Bot, 
   Settings,
   CreditCard,
@@ -38,6 +43,11 @@ const navigationSections: NavigationSection[] = [
   {
     label: 'Main',
     items: [
+      {
+        label: 'Today',
+        href: '/dashboard/today',
+        icon: Sun,
+      },
       {
         label: 'Dashboard',
         href: '/dashboard',
@@ -68,6 +78,21 @@ const navigationSections: NavigationSection[] = [
         href: '/dashboard/progress',
         icon: TrendingUp,
       },
+      {
+        label: 'Status',
+        href: '/dashboard/status',
+        icon: Heart,
+      },
+      {
+        label: 'Records',
+        href: '/dashboard/records',
+        icon: Trophy,
+      },
+      {
+        label: 'History',
+        href: '/dashboard/history',
+        icon: History,
+      },
     ],
   },
   {
@@ -78,6 +103,11 @@ const navigationSections: NavigationSection[] = [
         href: '/dashboard/messages',
         icon: MessageCircle,
         unreadCount: 2, // Unread indicator (red dot, not number)
+      },
+      {
+        label: 'Feed',
+        href: '/dashboard/feed',
+        icon: Activity,
       },
       {
         label: 'AI Coach',
@@ -98,6 +128,11 @@ const navigationSections: NavigationSection[] = [
         label: 'Billing',
         href: '/dashboard/billing',
         icon: CreditCard,
+      },
+      {
+        label: 'Profile',
+        href: '/dashboard/profile',
+        icon: User,
       },
     ],
   },
