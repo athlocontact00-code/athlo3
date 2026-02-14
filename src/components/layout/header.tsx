@@ -21,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { ProfileSwitcher } from '@/components/common/profile-switcher';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -118,6 +119,11 @@ export function Header({ className }: HeaderProps) {
 
         {/* Right Section */}
         <div className="flex items-center gap-1">
+          {/* Profile Switcher (Demo) */}
+          <div className="mr-2">
+            <ProfileSwitcher />
+          </div>
+
           {/* Search / Command Palette */}
           <Button 
             variant="ghost" 

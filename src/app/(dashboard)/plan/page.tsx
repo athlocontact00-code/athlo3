@@ -21,10 +21,12 @@ import {
   PersonStanding,
   Bike,
   Dumbbell,
-  Waves
+  Waves,
+  MessageSquare
 } from 'lucide-react';
 import { format, startOfWeek, addDays, subDays, addWeeks, subWeeks } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { useUserProfile } from '@/hooks/use-user-profile';
 
 type WorkoutStatus = 'planned' | 'completed' | 'missed' | 'modified';
 
@@ -48,6 +50,7 @@ interface DayPlan {
 }
 
 export default function PlanPage() {
+  const { profile, config } = useUserProfile();
   const [currentWeek, setCurrentWeek] = useState(new Date());
   const [showWorkoutLibrary, setShowWorkoutLibrary] = useState(false);
 
@@ -172,23 +175,61 @@ export default function PlanPage() {
         className="flex flex-col md:flex-row md:items-center justify-between gap-4"
       >
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-foreground">Training Plan</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground">
+            {profile === 'coach' ? 'Team Plans' : 'Training Plan'}
+          </h1>
           <p className="text-muted-foreground">
-            Your structured weekly training schedule
+            {profile === 'coach' 
+              ? 'Manage training plans for your athletes'
+              : profile === 'athlete-coach' 
+                ? 'Your coach-designed training schedule'
+                : profile === 'athlete-ai'
+                  ? 'AI-generated training plan tailored for you'
+                  : 'Your structured weekly training schedule'
+            }
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button 
-            variant="outline"
-            onClick={() => setShowWorkoutLibrary(!showWorkoutLibrary)}
-          >
-            <BookOpen className="h-4 w-4 mr-2" />
-            Library
-          </Button>
-          <Button>
-            <Plus className="h-4 w-4 mr-2" />
-            Add Workout
-          </Button>
+          {profile === 'athlete-coach' ? (
+            /* Athlete with Coach - View only with feedback options */
+            <>
+              <Button variant="outline">
+                <MessageSquare className="h-4 w-4 mr-2" />
+                Ask Coach
+              </Button>
+              <Button variant="outline">
+                <TrendingUp className="h-4 w-4 mr-2" />
+                Feedback
+              </Button>
+            </>
+          ) : profile === 'athlete-ai' ? (
+            /* Athlete with AI - AI controls with modification options */
+            <>
+              <Button variant="outline">
+                <Target className="h-4 w-4 mr-2" />
+                Modify Plan
+              </Button>
+              <Button>
+                <Plus className="h-4 w-4 mr-2" />
+                Regenerate
+              </Button>
+            </>
+          ) : (
+            /* Coach and Solo Athlete - Full control */
+            <>
+              <Button 
+                variant="outline"
+                onClick={() => setShowWorkoutLibrary(!showWorkoutLibrary)}
+              >
+                <BookOpen className="h-4 w-4 mr-2" />
+                Library
+              </Button>
+              <Button>
+                <Plus className="h-4 w-4 mr-2" />
+                {profile === 'coach' ? 'Create Plan' : 'Add Workout'}
+              </Button>
+            </>
+          )}
         </div>
       </motion.div>
 
@@ -199,27 +240,89 @@ export default function PlanPage() {
           animate={{ opacity: 1, x: 0 }}
           className={cn("space-y-6", showWorkoutLibrary ? "lg:col-span-3" : "lg:col-span-4")}
         >
-          {/* Compliance Bar */}
+          {/* Compliance Bar / Team Stats */}
           <Card className="bg-card/50 backdrop-blur-sm">
             <CardContent className="pt-6">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="font-semibold text-foreground">Weekly Compliance</h3>
-                <span className="text-2xl font-bold text-primary">{Math.round(compliance)}%</span>
-              </div>
-              <Progress value={compliance} className="mb-2" />
-              <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <span>{completedWorkouts}/{totalPlannedWorkouts} workouts completed</span>
-                <span className={cn(
-                  "font-medium",
-                  compliance >= 80 ? "text-green-500" : 
-                  compliance >= 60 ? "text-yellow-500" : 
-                  "text-red-500"
-                )}>
-                  {compliance >= 80 ? "Excellent!" : 
-                   compliance >= 60 ? "Good progress" : 
-                   "Keep going!"}
-                </span>
-              </div>
+              {profile === 'coach' ? (
+                /* Coach view - Team compliance */
+                <>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold text-foreground">Team Compliance</h3>
+                    <span className="text-2xl font-bold text-primary">87%</span>
+                  </div>
+                  <Progress value={87} className="mb-2" />
+                  <div className="flex items-center justify-between text-sm text-muted-foreground">
+                    <span>6 of 8 athletes on track this week</span>
+                    <span className="font-medium text-green-500">Great work!</span>
+                  </div>
+                </>
+              ) : profile === 'athlete-coach' ? (
+                /* Athlete with coach - Show coach's plan compliance */
+                <>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold text-foreground">Plan Adherence</h3>
+                    <span className="text-2xl font-bold text-primary">{Math.round(compliance)}%</span>
+                  </div>
+                  <Progress value={compliance} className="mb-2" />
+                  <div className="flex items-center justify-between text-sm text-muted-foreground">
+                    <span>Following Coach Anna's plan</span>
+                    <span className={cn(
+                      "font-medium",
+                      compliance >= 80 ? "text-green-500" : 
+                      compliance >= 60 ? "text-yellow-500" : 
+                      "text-red-500"
+                    )}>
+                      {compliance >= 80 ? "Coach will be proud!" : 
+                       compliance >= 60 ? "Good progress" : 
+                       "Let's catch up!"}
+                    </span>
+                  </div>
+                </>
+              ) : profile === 'athlete-ai' ? (
+                /* AI athlete - AI plan adherence */
+                <>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold text-foreground">AI Plan Progress</h3>
+                    <span className="text-2xl font-bold text-primary">{Math.round(compliance)}%</span>
+                  </div>
+                  <Progress value={compliance} className="mb-2" />
+                  <div className="flex items-center justify-between text-sm text-muted-foreground">
+                    <span>AI is adapting to your progress</span>
+                    <span className={cn(
+                      "font-medium",
+                      compliance >= 80 ? "text-green-500" : 
+                      compliance >= 60 ? "text-yellow-500" : 
+                      "text-red-500"
+                    )}>
+                      {compliance >= 80 ? "AI approves!" : 
+                       compliance >= 60 ? "Stay consistent" : 
+                       "AI adjusting plan"}
+                    </span>
+                  </div>
+                </>
+              ) : (
+                /* Solo athlete - Personal compliance */
+                <>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold text-foreground">Weekly Compliance</h3>
+                    <span className="text-2xl font-bold text-primary">{Math.round(compliance)}%</span>
+                  </div>
+                  <Progress value={compliance} className="mb-2" />
+                  <div className="flex items-center justify-between text-sm text-muted-foreground">
+                    <span>{completedWorkouts}/{totalPlannedWorkouts} workouts completed</span>
+                    <span className={cn(
+                      "font-medium",
+                      compliance >= 80 ? "text-green-500" : 
+                      compliance >= 60 ? "text-yellow-500" : 
+                      "text-red-500"
+                    )}>
+                      {compliance >= 80 ? "Excellent!" : 
+                       compliance >= 60 ? "Good progress" : 
+                       "Keep going!"}
+                    </span>
+                  </div>
+                </>
+              )}
             </CardContent>
           </Card>
 

@@ -9,6 +9,93 @@ export type UserProfile =
   | 'athlete-solo'    // 🏃‍♂️ Self-managed, tracks own health & training data (TrainingPeaks style)
   | 'athlete-ai';     // 🤖 Trains with ATHLO's AI Coach, gets AI-generated plans & insights
 
+export interface UserProfileConfig {
+  type: UserProfile;
+  label: string;
+  description: string;
+  icon: string;
+  sidebarItems: string[];
+  dashboardWidgets: string[];
+  onboardingSteps: string[];
+}
+
+// Full config for each profile
+export const profileConfigs: Record<UserProfile, UserProfileConfig> = {
+  'coach': {
+    type: 'coach',
+    label: 'Coach',
+    description: 'Professional or amateur coach managing athletes',
+    icon: '👨‍🏫',
+    sidebarItems: [
+      'dashboard', 'athletes', 'calendar-shared', 'plans', 
+      'messages', 'team-stats', 'settings', 'billing'
+    ],
+    dashboardWidgets: [
+      'athlete-roster', 'shared-calendar-overview', 'team-compliance-stats',
+      'athlete-messages', 'plan-assignment-tools', 'team-leaderboard'
+    ],
+    onboardingSteps: [
+      'welcome-coach', 'add-first-athlete', 'create-plan-template',
+      'set-up-team', 'onboarding-complete'
+    ]
+  },
+  'athlete-coach': {
+    type: 'athlete-coach',
+    label: 'Athlete + Coach',
+    description: 'Athlete who trains with a human coach on ATHLO',
+    icon: '🏃',
+    sidebarItems: [
+      'today', 'dashboard', 'calendar', 'diary', 'plan-view',
+      'progress', 'messages', 'settings'
+    ],
+    dashboardWidgets: [
+      'todays-readiness', 'planned-workout-from-coach', 'coach-messages',
+      'check-in-status', 'weekly-load'
+    ],
+    onboardingSteps: [
+      'welcome-athlete', 'connect-with-coach', 'set-training-zones',
+      'first-check-in', 'onboarding-complete'
+    ]
+  },
+  'athlete-solo': {
+    type: 'athlete-solo',
+    label: 'Solo Athlete',
+    description: 'Self-managed athlete tracking own training & health',
+    icon: '💪',
+    sidebarItems: [
+      'today', 'dashboard', 'calendar', 'diary', 'plan-full',
+      'progress', 'records', 'history', 'status', 'settings', 'billing'
+    ],
+    dashboardWidgets: [
+      'todays-readiness', 'self-planned-workouts', 'check-in-status',
+      'weekly-load', 'progress-charts', 'health-metrics', 'goal-tracker'
+    ],
+    onboardingSteps: [
+      'welcome-solo', 'set-training-zones', 'create-first-workout',
+      'first-check-in', 'onboarding-complete'
+    ]
+  },
+  'athlete-ai': {
+    type: 'athlete-ai',
+    label: 'AI Athlete',
+    description: 'Athlete who uses ATHLO\'s AI as their coach',
+    icon: '🤖',
+    sidebarItems: [
+      'today', 'dashboard', 'calendar', 'diary', 'plan-ai',
+      'progress', 'records', 'history', 'status', 'ai-coach',
+      'settings', 'billing'
+    ],
+    dashboardWidgets: [
+      'todays-readiness', 'ai-recommended-workout', 'ai-insights',
+      'check-in-status', 'weekly-load', 'ai-chat-preview'
+    ],
+    onboardingSteps: [
+      'welcome-ai', 'meet-ai-coach', 'ai-goal-assessment',
+      'ai-generates-plan', 'first-check-in', 'onboarding-complete'
+    ]
+  }
+};
+
 export interface UserProfileData {
   profileType: UserProfile;
   name: string;

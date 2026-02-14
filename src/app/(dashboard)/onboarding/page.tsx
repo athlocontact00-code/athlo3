@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { useUserProfile } from '@/hooks/use-user-profile';
 
 const trainingZones = [
   { zone: 1, name: 'Active Recovery', color: 'bg-gray-500', percentage: '50-60%', description: 'Very light activity' },
@@ -93,6 +94,7 @@ interface OnboardingState {
 }
 
 export default function OnboardingPage() {
+  const { profile, config } = useUserProfile();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<OnboardingState>({
     restingHeartRate: '',
@@ -102,7 +104,38 @@ export default function OnboardingPage() {
     completedSteps: [],
   });
 
-  const totalSteps = 5;
+  // Profile-specific onboarding steps
+  const getProfileSteps = () => {
+    switch (profile) {
+      case 'coach':
+        return {
+          totalSteps: 5,
+          steps: ['welcome', 'add-athlete', 'create-plan', 'team-setup', 'complete']
+        };
+      case 'athlete-coach':
+        return {
+          totalSteps: 5,
+          steps: ['welcome', 'connect-coach', 'training-zones', 'first-checkin', 'complete']
+        };
+      case 'athlete-solo':
+        return {
+          totalSteps: 5,
+          steps: ['welcome', 'training-zones', 'create-workout', 'first-checkin', 'complete']
+        };
+      case 'athlete-ai':
+        return {
+          totalSteps: 6,
+          steps: ['welcome', 'meet-ai', 'goal-assessment', 'ai-plan', 'first-checkin', 'complete']
+        };
+      default:
+        return {
+          totalSteps: 5,
+          steps: ['welcome', 'training-zones', 'goals', 'integrations', 'complete']
+        };
+    }
+  };
+
+  const { totalSteps } = getProfileSteps();
 
   const handleNext = () => {
     if (currentStep < totalSteps) {
@@ -232,12 +265,12 @@ export default function OnboardingPage() {
             }}
             className="max-w-2xl mx-auto"
           >
-            {/* Step 1: Welcome */}
+            {/* Step 1: Welcome - Profile Specific */}
             {currentStep === 1 && (
               <div className="text-center space-y-8">
                 <div className="relative">
-                  <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Sparkles className="w-12 h-12 text-primary" />
+                  <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
+                    {config.icon}
                   </div>
                   <motion.div
                     animate={{ 
@@ -257,11 +290,22 @@ export default function OnboardingPage() {
                 
                 <div>
                   <h1 className="text-4xl font-bold text-foreground mb-4">
-                    Welcome to ATHLO!
+                    {profile === 'coach' 
+                      ? 'Welcome, Coach!'
+                      : profile === 'athlete-ai'
+                        ? 'Welcome to AI-Powered Training!'
+                        : 'Welcome to ATHLO!'
+                    }
                   </h1>
                   <p className="text-xl text-muted-foreground max-w-lg mx-auto">
-                    Let's set up your account in just a few steps. This will help us 
-                    personalize your training experience.
+                    {profile === 'coach' 
+                      ? "Let's set up your coaching platform. We'll help you manage your athletes and create effective training plans."
+                      : profile === 'athlete-coach'
+                        ? "You're about to connect with your coach and start your personalized training journey."
+                        : profile === 'athlete-ai'
+                          ? "Get ready to train with our AI Coach. We'll create a personalized plan that adapts to your progress."
+                          : "Let's set up your account in just a few steps. This will help us personalize your training experience."
+                    }
                   </p>
                 </div>
 

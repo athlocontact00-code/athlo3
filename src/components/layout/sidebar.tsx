@@ -21,17 +21,22 @@ import {
   CreditCard,
   User,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Users,
+  BarChart3
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { useUserProfile } from '@/hooks/use-user-profile';
+import { UserProfile } from '@/lib/user-profile';
 
 interface NavigationItem {
   label: string;
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   unreadCount?: number;
+  isHighlighted?: boolean;
 }
 
 interface NavigationSection {
@@ -39,109 +44,153 @@ interface NavigationSection {
   items: NavigationItem[];
 }
 
-const navigationSections: NavigationSection[] = [
-  {
-    label: 'Main',
-    items: [
-      {
-        label: 'Today',
-        href: '/today',
-        icon: Sun,
-      },
-      {
-        label: 'Dashboard',
-        href: '/',
-        icon: LayoutDashboard,
-      },
-      {
-        label: 'Calendar',
-        href: '/calendar',
-        icon: Calendar,
-      },
-      {
-        label: 'Plan',
-        href: '/plan',
-        icon: Target,
-      },
-    ],
-  },
-  {
-    label: 'Track',
-    items: [
-      {
-        label: 'Diary',
-        href: '/diary',
-        icon: BookOpen,
-      },
-      {
-        label: 'Progress',
-        href: '/progress',
-        icon: TrendingUp,
-      },
-      {
-        label: 'Status',
-        href: '/status',
-        icon: Heart,
-      },
-      {
-        label: 'Records',
-        href: '/records',
-        icon: Trophy,
-      },
-      {
-        label: 'History',
-        href: '/history',
-        icon: History,
-      },
-    ],
-  },
-  {
-    label: 'Social',
-    items: [
-      {
-        label: 'Messages',
-        href: '/messages',
-        icon: MessageCircle,
-        unreadCount: 2, // Unread indicator (red dot, not number)
-      },
-      {
-        label: 'Feed',
-        href: '/feed',
-        icon: Activity,
-      },
-      {
-        label: 'AI Coach',
-        href: '/ai-coach',
-        icon: Bot,
-      },
-    ],
-  },
-  {
-    label: 'Account',
-    items: [
-      {
-        label: 'Settings',
-        href: '/settings',
-        icon: Settings,
-      },
-      {
-        label: 'Billing',
-        href: '/billing',
-        icon: CreditCard,
-      },
-      {
-        label: 'Profile',
-        href: '/profile',
-        icon: User,
-      },
-      {
-        label: 'Changelog',
-        href: '/changelog',
-        icon: History,
-      },
-    ],
-  },
-];
+// Navigation configurations for each profile type
+const getNavigationSections = (profile: UserProfile): NavigationSection[] => {
+  switch (profile) {
+    case 'coach':
+      return [
+        {
+          label: 'Main',
+          items: [
+            { label: 'Dashboard', href: '/', icon: LayoutDashboard },
+            { label: 'Athletes', href: '/athletes', icon: Users },
+            { label: 'Calendar (Shared)', href: '/calendar', icon: Calendar },
+            { label: 'Plans', href: '/plan', icon: Target },
+          ],
+        },
+        {
+          label: 'Communication',
+          items: [
+            { label: 'Messages', href: '/messages', icon: MessageCircle, unreadCount: 2 },
+          ],
+        },
+        {
+          label: 'Analytics',
+          items: [
+            { label: 'Team Stats', href: '/analytics', icon: BarChart3 },
+          ],
+        },
+        {
+          label: 'Account',
+          items: [
+            { label: 'Settings', href: '/settings', icon: Settings },
+            { label: 'Billing', href: '/billing', icon: CreditCard },
+          ],
+        },
+      ];
+
+    case 'athlete-coach':
+      return [
+        {
+          label: 'Main',
+          items: [
+            { label: 'Today', href: '/today', icon: Sun },
+            { label: 'Dashboard', href: '/', icon: LayoutDashboard },
+            { label: 'Calendar', href: '/calendar', icon: Calendar },
+          ],
+        },
+        {
+          label: 'Track',
+          items: [
+            { label: 'Diary', href: '/diary', icon: BookOpen },
+            { label: 'Plan (view)', href: '/plan', icon: Target },
+            { label: 'Progress', href: '/progress', icon: TrendingUp },
+          ],
+        },
+        {
+          label: 'Communication',
+          items: [
+            { label: 'Messages', href: '/messages', icon: MessageCircle, unreadCount: 1 },
+          ],
+        },
+        {
+          label: 'Account',
+          items: [
+            { label: 'Settings', href: '/settings', icon: Settings },
+          ],
+        },
+      ];
+
+    case 'athlete-solo':
+      return [
+        {
+          label: 'Main',
+          items: [
+            { label: 'Today', href: '/today', icon: Sun },
+            { label: 'Dashboard', href: '/', icon: LayoutDashboard },
+            { label: 'Calendar', href: '/calendar', icon: Calendar },
+          ],
+        },
+        {
+          label: 'Track',
+          items: [
+            { label: 'Diary', href: '/diary', icon: BookOpen },
+            { label: 'Plan (full)', href: '/plan', icon: Target },
+            { label: 'Progress', href: '/progress', icon: TrendingUp },
+            { label: 'Records', href: '/records', icon: Trophy },
+            { label: 'History', href: '/history', icon: History },
+          ],
+        },
+        {
+          label: 'Health',
+          items: [
+            { label: 'Status', href: '/status', icon: Heart },
+          ],
+        },
+        {
+          label: 'Account',
+          items: [
+            { label: 'Settings', href: '/settings', icon: Settings },
+            { label: 'Billing', href: '/billing', icon: CreditCard },
+          ],
+        },
+      ];
+
+    case 'athlete-ai':
+      return [
+        {
+          label: 'Main',
+          items: [
+            { label: 'Today', href: '/today', icon: Sun },
+            { label: 'Dashboard', href: '/', icon: LayoutDashboard },
+            { label: 'Calendar', href: '/calendar', icon: Calendar },
+          ],
+        },
+        {
+          label: 'Track',
+          items: [
+            { label: 'Diary', href: '/diary', icon: BookOpen },
+            { label: 'Plan', href: '/plan', icon: Target },
+            { label: 'Progress', href: '/progress', icon: TrendingUp },
+            { label: 'Records', href: '/records', icon: Trophy },
+            { label: 'History', href: '/history', icon: History },
+          ],
+        },
+        {
+          label: 'Health',
+          items: [
+            { label: 'Status', href: '/status', icon: Heart },
+          ],
+        },
+        {
+          label: 'AI',
+          items: [
+            { label: 'AI Coach', href: '/ai-coach', icon: Bot, isHighlighted: true },
+          ],
+        },
+        {
+          label: 'Account',
+          items: [
+            { label: 'Settings', href: '/settings', icon: Settings },
+            { label: 'Billing', href: '/billing', icon: CreditCard },
+          ],
+        },
+      ];
+
+    default:
+      return getNavigationSections('athlete-solo');
+  }
+};
 
 interface SidebarProps {
   className?: string;
@@ -150,12 +199,30 @@ interface SidebarProps {
 export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const { profile, config } = useUserProfile();
+
+  const navigationSections = getNavigationSections(profile);
 
   const isActive = (href: string) => {
     if (href === '/') {
       return pathname === '/';
     }
     return pathname === href;
+  };
+
+  const getUserRole = (profile: UserProfile) => {
+    switch (profile) {
+      case 'coach':
+        return 'Coach';
+      case 'athlete-coach':
+        return 'Athlete + Coach';
+      case 'athlete-solo':
+        return 'Solo Athlete';
+      case 'athlete-ai':
+        return 'AI Athlete';
+      default:
+        return 'Athlete';
+    }
   };
 
   return (
@@ -222,6 +289,7 @@ export function Sidebar({ className }: SidebarProps) {
                       className={cn(
                         "group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium",
                         "transition-all duration-200 ease-out relative",
+                        item.isHighlighted && "ring-1 ring-primary/50 bg-primary/5",
                         active 
                           ? "bg-primary/10 text-white border-l-2 border-primary ml-1 pl-2" 
                           : "text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 border-l-2 border-transparent ml-1 pl-2"
@@ -235,12 +303,17 @@ export function Sidebar({ className }: SidebarProps) {
                       <Icon className={cn(
                         "flex-shrink-0 transition-colors duration-200",
                         "w-5 h-5", // Consistent 20px size
+                        item.isHighlighted && "text-primary",
                         active ? "text-primary" : "text-sidebar-foreground/60 group-hover:text-sidebar-foreground"
                       )} />
                       
                       {!collapsed && (
                         <>
                           <span className="flex-1">{item.label}</span>
+                          {/* Highlighted badge */}
+                          {item.isHighlighted && (
+                            <div className="text-xs text-primary">⭐</div>
+                          )}
                           {/* Unread indicator - small red dot, not number */}
                           {item.unreadCount && item.unreadCount > 0 && (
                             <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0" />
@@ -270,9 +343,9 @@ export function Sidebar({ className }: SidebarProps) {
       <div className="border-t border-sidebar-border/30 p-4">
         {!collapsed ? (
           <div className="flex items-center gap-3 p-3 rounded-xl bg-sidebar-accent/30">
-            {/* User Avatar - small circle */}
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0">
-              <User className="w-4 h-4 text-white" />
+            {/* User Avatar with profile icon */}
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0 text-sm">
+              {config.icon}
             </div>
             
             <div className="flex-1 min-w-0">
@@ -285,21 +358,21 @@ export function Sidebar({ className }: SidebarProps) {
                   variant="secondary" 
                   className="text-xs px-2 py-0.5 bg-primary/20 text-primary border-none"
                 >
-                  Athlete
+                  {getUserRole(profile)}
                 </Badge>
               </div>
             </div>
           </div>
         ) : (
           <div className="group relative">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto">
-              <User className="w-4 h-4 text-white" />
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto text-sm">
+              {config.icon}
             </div>
             
             {/* Tooltip for collapsed state */}
             <div className="absolute left-full ml-6 bottom-0 px-3 py-2 bg-popover text-popover-foreground text-sm rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-50">
               <div className="font-medium">Bartek</div>
-              <div className="text-xs text-muted-foreground">Athlete</div>
+              <div className="text-xs text-muted-foreground">{getUserRole(profile)}</div>
             </div>
           </div>
         )}
